@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nippori Clean-room Sample</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --ink: #050505;
+      --paper: #fbfbf8;
+      --line: #0b0b0b;
+      --soft: #f1f0ea;
+      --serif: "Times New Roman", "Songti SC", "SimSun", serif;
+      --sans: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+    a, button { color: inherit; font: inherit; }
+    button { cursor: pointer; }
+    .page {
+      width: min(100%, 480px);
+      min-height: 100vh;
+      margin: 0 auto;
+      position: relative;
+      background: var(--paper);
+    }
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: var(--paper);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 18px 12px 32px;
+      animation: loader-out .7s ease 2.9s forwards;
+      pointer-events: none;
+    }
+    .loader-logo {
+      justify-self: center;
+      font-family: var(--serif);
+      font-size: 25px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.08em;
+    }
+    .loader-grid {
+      align-self: center;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      width: 100%;
+      font-size: 32px;
+      line-height: 1;
+      text-align: center;
+    }
+    .loader-grid span::before { content: "0%"; animation: count 2.7s steps(4) forwards; }
+    .loader-grid span:nth-child(2)::before { animation-delay: .12s; }
+    .loader-grid span:nth-child(3)::before { animation-delay: .24s; }
+    .loader-grid span:nth-child(4)::before { animation-delay: .36s; }
+    .loader-grid span:nth-child(5)::before { animation-delay: .48s; }
+    .loader-copy {
+      justify-self: center;
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 26px;
+      line-height: 1.05;
+      font-weight: 900;
+      letter-spacing: -.08em;
+    }
+    @keyframes count {
+      0% { content: "0%"; }
+      25% { content: "28%"; }
+      50% { content: "63%"; }
+      75% { content: "91%"; }
+      100% { content: "100%"; }
+    }
+    @keyframes loader-out {
+      to { opacity: 0; visibility: hidden; }
+    }
+    .topbar {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      width: min(calc(100% - 20px), 460px);
+      transform: translateX(-50%);
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 122px 1fr 88px;
+      align-items: start;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .pill, .logo-pill, .latest {
+      pointer-events: auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: stretch;
+      min-height: 22px;
+      overflow: hidden;
+    }
+    .pill {
+      font-size: 8.5px;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .pill .thumb {
+      width: 22px;
+      border-right: 1px solid var(--line);
+      background: radial-gradient(circle at 50% 50%, #111 0 4px, transparent 5px), #ddd;
+      filter: grayscale(1);
+    }
+    .marquee {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      flex: 1;
+    }
+    .marquee span {
+      display: inline-block;
+      padding: 0 8px;
+      white-space: nowrap;
+      animation: slide 8s linear infinite;
+    }
+    .logo-pill {
+      border-radius: 999px;
+      justify-content: center;
+      padding: 5px 12px;
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: .8;
+      font-weight: 900;
+      letter-spacing: -.09em;
+      text-decoration: none;
+    }
+    .latest {
+      font-size: 9px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    @keyframes slide {
+      to { transform: translateX(-100%); }
+    }
+    .bottombar {
+      position: fixed;
+      left: 50%;
+      bottom: 8px;
+      width: min(calc(100% - 20px), 460px);
+      transform: translateX(-50%);
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 8px;
+      pointer-events: none;
+      font-size: 9px;
+      line-height: 1;
+    }
+    .producer, .platforms, .menu-btn {
+      pointer-events: auto;
+    }
+    .producer { align-self: center; }
+    .menu-btn {
+      border: 0;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 7px 24px;
+      font-weight: 800;
+      letter-spacing: .05em;
+    }
+    .platforms {
+      justify-self: end;
+      display: flex;
+      gap: 0;
+    }
+    .contact-mini {
+      justify-self: end;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 5px 8px;
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 800;
+      pointer-events: auto;
+    }
+    .hero {
+      min-height: 100svh;
+      padding: 42px 8px 0;
+      position: relative;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    h1 {
+      display: none;
+      position: absolute;
+      z-index: 4;
+      left: 12px;
+      right: 12px;
+      top: 535px;
+      margin: 0;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: clamp(42px, 12vw, 56px);
+      line-height: .88;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+      text-align: justify;
+      text-wrap: balance;
+      font-weight: 900;
+      mix-blend-mode: multiply;
+    }
+    .subcopy {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 92px;
+      z-index: 4;
+      padding: 10px 12px;
+      background: rgba(251, 251, 248, .9);
+      border: 1px solid var(--line);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    .video-card {
+      position: absolute;
+      z-index: 2;
+      overflow: hidden;
+      background: #ddd;
+      border: 1px solid transparent;
+      isolation: isolate;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+    .video-card::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 32% 24%, #0b0b0b 0 9%, transparent 10%),
+        radial-gradient(circle at 72% 30%, #d6d6d0 0 18%, transparent 19%),
+        radial-gradient(circle at 55% 72%, #9f9d92 0 22%, transparent 23%),
+        linear-gradient(135deg, #f3f2eb, #bfbdb3 48%, #111 48% 52%, #e9e8df 52%);
+      filter: contrast(1.1);
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+    .video-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,.18) 0 2px, transparent 2px 6px);
+      mix-blend-mode: screen;
+    }
+    .v1 { width: 246px; height: 128px; right: -46px; top: 476px; transform: rotate(-4deg); }
+    .v2 { width: 336px; height: 82px; left: -76px; top: 540px; transform: rotate(3deg); }
+    .v3 { width: 126px; height: 156px; right: 8px; top: 605px; transform: rotate(7deg); }
+    .v4 { width: 176px; height: 118px; left: -38px; top: 638px; transform: rotate(-7deg); }
+    .v5 { width: 148px; height: 82px; left: 170px; top: 742px; transform: rotate(5deg); }
+    .v6 { width: 96px; height: 96px; right: 112px; top: 606px; border-radius: 50%; transform: rotate(-5deg); }
+    @keyframes drift {
+      to { transform: translate3d(8%, -6%, 0) scale(1.08); }
+    }
+    .collage-field {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .archive-wall {
+      position: absolute;
+      left: 0;
+      right: -112px;
+      top: 58px;
+      height: 382px;
+      z-index: 5;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .archive-card {
+      position: absolute;
+      background: #fff;
+      border: 8px solid var(--line);
+      color: var(--ink);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px #fff inset;
+    }
+    .archive-card.thin { border-width: 5px; }
+    .archive-card .issue {
+      display: block;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 52px;
+      line-height: .86;
+      letter-spacing: -.06em;
+      white-space: nowrap;
+    }
+    .archive-card .tag {
+      display: inline-block;
+      margin-left: 4px;
+      padding: 1px 4px 2px;
+      background: var(--ink);
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1;
+    }
+    .archive-card .headline {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.05;
+      letter-spacing: -.04em;
+      font-weight: 900;
+    }
+    .archive-card .headline.compact {
+      font-size: 15px;
+      line-height: 1.15;
+      letter-spacing: -.03em;
+    }
+    .archive-card .vertical {
+      writing-mode: vertical-rl;
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: .02em;
+    }
+    .archive-card .smallcopy {
+      font-family: var(--serif);
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+    .archive-card .smallcopy.strong {
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .archive-card .arrow {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      width: 42px;
+      height: 42px;
+      border: 5px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .archive-card.a1 { width: 214px; height: 160px; left: 8px; top: -34px; padding: 12px; }
+    .archive-card.a2 { width: 156px; height: 210px; left: 252px; top: -22px; padding: 10px; z-index: 4; }
+    .archive-card.a3 { width: 216px; height: 138px; left: 272px; top: 38px; padding: 10px; z-index: 5; }
+    .archive-card.a4 { width: 192px; height: 176px; left: 88px; top: 132px; padding: 10px; z-index: 3; }
+    .archive-card.a5 { width: 230px; height: 150px; left: 226px; top: 204px; padding: 10px; z-index: 5; }
+    .archive-card.a6 { width: 104px; height: 214px; left: 0; top: 104px; padding: 8px; z-index: 2; }
+    .archive-card.a7 { width: 176px; height: 86px; left: 172px; top: 298px; padding: 8px; z-index: 6; }
+    .archive-card.a8 { width: 156px; height: 78px; left: 210px; top: 122px; padding: 7px; z-index: 4; }
+    .archive-card.a9 { width: 82px; height: 150px; left: 18px; top: 258px; padding: 7px; z-index: 5; }
+    .archive-card.a10 { width: 184px; height: 76px; left: 310px; top: 314px; padding: 7px; z-index: 3; }
+    .archive-card.a11 { width: 64px; height: 116px; left: 352px; top: 238px; padding: 6px; z-index: 7; }
+    .cursor-hand {
+      position: absolute;
+      left: 292px;
+      top: 304px;
+      z-index: 8;
+      width: 72px;
+      height: 86px;
+      filter: drop-shadow(0 2px 0 #fff);
+    }
+    .cursor-hand::before {
+      content: "";
+      position: absolute;
+      left: 29px;
+      top: 3px;
+      width: 16px;
+      height: 48px;
+      background: #fff;
+      border: 5px solid var(--line);
+      border-bottom: 0;
+    }
+    .cursor-hand::after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 39px;
+      width: 48px;
+      height: 38px;
+      background: #fff;
+      border: 5px solid var(--line);
+      clip-path: polygon(0 0, 72% 0, 100% 42%, 88% 100%, 22% 100%, 0 58%);
+    }
+    .future-strip {
+      position: absolute;
+      left: 0;
+      top: 398px;
+      z-index: 6;
+      width: 100%;
+      height: 116px;
+      background: var(--ink);
+      color: var(--paper);
+      overflow: hidden;
+      padding: 12px 14px;
+      box-shadow: 0 0 0 1px var(--ink);
+      pointer-events: none;
+    }
+    .future-strip .future-text {
+      display: block;
+      max-width: 218px;
+      font-family: var(--serif);
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -.08em;
+      font-weight: 900;
+      transform: scaleX(1.08);
+      transform-origin: left top;
+    }
+    .future-strip .future-label {
+      position: absolute;
+      right: 18px;
+      bottom: 12px;
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: -.04em;
+      font-weight: 900;
+    }
+    .future-art {
+      position: absolute;
+      right: 14px;
+      bottom: 38px;
+      width: 76px;
+      height: 48px;
+      background:
+        radial-gradient(ellipse at 46% 58%, rgba(255,255,255,.8) 0 10%, transparent 12%),
+        radial-gradient(ellipse at 48% 57%, transparent 0 28%, #141414 29% 34%, transparent 35%),
+        linear-gradient(24deg, transparent 0 45%, #6f6f6f 46% 51%, transparent 52%),
+        linear-gradient(152deg, transparent 0 42%, #d8d8d8 43% 48%, transparent 49%),
+        radial-gradient(circle at 34% 53%, #111 0 3px, transparent 4px),
+        linear-gradient(120deg, #f3f3f3, #bdbdbd);
+      filter: grayscale(1) contrast(1.1);
+    }
+    .future-art::before,
+    .future-art::after {
+      content: "";
+      position: absolute;
+      border: 2px solid #111;
+      border-radius: 50%;
+      transform: rotate(-14deg);
+    }
+    .future-art::before {
+      width: 44px;
+      height: 15px;
+      right: 12px;
+      top: 22px;
+    }
+    .future-art::after {
+      width: 24px;
+      height: 10px;
+      left: 18px;
+      top: 26px;
+    }
+    .cut, .mini-still, .track, .micro-copy, .ring {
+      position: absolute;
+      pointer-events: none;
+    }
+    .cut, .mini-still {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 70% 20%, #141414 0 11%, transparent 12%),
+        radial-gradient(circle at 26% 74%, #aaa79c 0 20%, transparent 21%),
+        linear-gradient(128deg, #faf9f2 0 28%, #c8c4b8 28% 43%, #111 43% 47%, #edece3 47% 100%);
+      filter: grayscale(1) contrast(1.15);
+      opacity: .92;
+      box-shadow: 0 5px 14px rgba(0,0,0,.08);
+      animation: floaty 7s ease-in-out infinite alternate;
+    }
+    .cut::after, .mini-still::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 1px, transparent 1px 7px),
+        linear-gradient(180deg, rgba(255,255,255,.15), transparent 48%, rgba(0,0,0,.18));
+      mix-blend-mode: screen;
+    }
+    .cut:nth-child(2n), .mini-still:nth-child(2n) {
+      background:
+        radial-gradient(circle at 40% 32%, #111 0 8%, transparent 9%),
+        linear-gradient(24deg, #d7d5ca 0 18%, #f7f6ef 18% 56%, #8c8a80 56% 68%, #e8e6dc 68%);
+    }
+    .c1 { width: 88px; height: 112px; left: -14px; top: 462px; transform: rotate(8deg); clip-path: polygon(0 8%, 100% 0, 86% 100%, 6% 90%); }
+    .c2 { width: 72px; height: 92px; right: 62px; top: 438px; transform: rotate(-14deg); clip-path: polygon(12% 0, 100% 18%, 82% 100%, 0 76%); }
+    .c3 { width: 126px; height: 58px; left: 92px; top: 496px; transform: rotate(-7deg); border-radius: 999px; }
+    .c4 { width: 96px; height: 132px; left: -26px; top: 580px; transform: rotate(-10deg); clip-path: polygon(0 0, 90% 12%, 100% 92%, 18% 100%); }
+    .c5 { width: 155px; height: 76px; left: 120px; top: 642px; transform: rotate(12deg); }
+    .c6 { width: 70px; height: 128px; right: 132px; top: 528px; transform: rotate(11deg); clip-path: polygon(20% 0, 100% 6%, 78% 100%, 0 88%); }
+    .c7 { width: 94px; height: 94px; left: 10px; top: 742px; transform: rotate(-8deg); border-radius: 50%; }
+    .c8 { width: 134px; height: 64px; right: -18px; top: 755px; transform: rotate(7deg); border-radius: 999px; }
+    .c9 { width: 86px; height: 112px; right: 150px; top: 708px; transform: rotate(-14deg); clip-path: polygon(4% 14%, 100% 0, 92% 88%, 0 100%); }
+    .c10 { width: 236px; height: 48px; left: -54px; top: 510px; transform: rotate(4deg); }
+    .mini-still {
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+    }
+    .mstill1 { left: 258px; top: 462px; }
+    .mstill2 { left: 28px; top: 545px; animation-delay: .6s; }
+    .mstill3 { right: 32px; top: 570px; animation-delay: 1.1s; }
+    .mstill4 { left: 274px; top: 705px; animation-delay: .3s; }
+    .mstill5 { left: 44px; top: 470px; animation-delay: 1.4s; }
+    .track {
+      border: 1px solid rgba(0,0,0,.42);
+      border-radius: 50%;
+      opacity: .65;
+      animation: orbit-drift 11s ease-in-out infinite alternate;
+    }
+    .t1 { width: 330px; height: 188px; left: -96px; top: 440px; transform: rotate(-12deg); }
+    .t2 { width: 460px; height: 282px; right: -238px; top: 530px; transform: rotate(19deg); }
+    .t3 { width: 340px; height: 360px; left: -150px; top: 470px; transform: rotate(11deg); }
+    .t4 { width: 420px; height: 150px; right: -160px; top: 650px; transform: rotate(-10deg); }
+    .ring {
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(251,251,248,.52);
+      font-family: var(--serif);
+      font-size: 9px;
+      line-height: .9;
+      text-align: center;
+      animation: spin 20s linear infinite reverse;
+    }
+    .r1 { left: 16px; top: 448px; }
+    .r2 { right: 24px; top: 518px; }
+    .r3 { left: 212px; top: 632px; }
+    .r4 { right: 42px; top: 718px; }
+    .micro-copy {
+      z-index: 2;
+      max-width: 92px;
+      font-size: 9px;
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      background: rgba(251,251,248,.76);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 5px 0;
+    }
+    .mc1 { left: 14px; top: 538px; transform: rotate(-6deg); }
+    .mc2 { right: 86px; top: 590px; transform: rotate(5deg); }
+    .mc3 { left: 236px; top: 728px; transform: rotate(-8deg); }
+    .mc4 { left: 26px; top: 768px; transform: rotate(4deg); }
+    @keyframes floaty {
+      to { translate: 8px -12px; }
+    }
+    @keyframes orbit-drift {
+      to { translate: -10px 18px; rotate: 8deg; }
+    }
+    .stamp {
+      position: absolute;
+      z-index: 3;
+      width: 100px;
+      height: 100px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-size: 13px;
+      text-align: center;
+      line-height: .9;
+      animation: spin 18s linear infinite;
+      background: rgba(255,255,255,.55);
+    }
+    .s1 { top: 494px; left: 150px; }
+    .s2 { top: 590px; right: 18px; }
+    .s3 { top: 668px; left: 96px; }
+    .s4 { top: 710px; left: 10px; }
+    .s5 { top: 522px; right: 64px; }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .section {
+      min-height: 100svh;
+      padding: 54px 12px 74px;
+      overflow: hidden;
+      position: relative;
+      scroll-snap-align: start;
+    }
+    h2 {
+      margin: 0;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: clamp(58px, 16.8vw, 82px);
+      line-height: .9;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+    .jp {
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: 14px;
+      margin: -6px 0 22px 8px;
+    }
+    .highlight-card {
+      z-index: 2;
+      min-height: 610px;
+      position: relative;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+    .num {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+    .highlight-card h3 {
+      margin: 0 0 10px;
+      font-family: var(--serif);
+      font-size: 34px;
+      line-height: 1.18;
+      letter-spacing: -.07em;
+    }
+    .highlight-card p {
+      margin: 0;
+      max-width: 270px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .page-kicker {
+      position: absolute;
+      right: 12px;
+      top: 64px;
+      width: 74px;
+      height: 74px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-size: 12px;
+      line-height: .9;
+      text-align: center;
+      background: rgba(255,255,255,.64);
+      animation: spin 22s linear infinite;
+    }
+    .pine-float {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .pine-nut {
+      position: absolute;
+      width: 34px;
+      height: 56px;
+      border: 1px solid rgba(0,0,0,.64);
+      border-radius: 58% 42% 52% 48% / 72% 68% 32% 28%;
+      background:
+        radial-gradient(ellipse at 42% 24%, rgba(255,255,255,.95) 0 18%, transparent 19%),
+        linear-gradient(145deg, #f5f3ea 0 28%, #c9c6b9 29% 52%, #fdfcf7 53% 72%, #7b786f 73% 100%);
+      filter: grayscale(1) contrast(1.14);
+      opacity: .74;
+      box-shadow: 0 4px 10px rgba(0,0,0,.08);
+      animation: pine-drift 9s ease-in-out infinite alternate;
+    }
+    .pine-nut::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -8px;
+      width: 10px;
+      height: 14px;
+      border: 1px solid rgba(0,0,0,.54);
+      border-bottom: 0;
+      border-radius: 50% 50% 0 0;
+      transform: translateX(-50%) rotate(-14deg);
+      background: #f8f7ef;
+    }
+    .pine-nut::after {
+      content: "";
+      position: absolute;
+      inset: 8px 11px 10px 15px;
+      border-left: 1px solid rgba(0,0,0,.28);
+      transform: rotate(7deg);
+    }
+    .pine-ring {
+      position: absolute;
+      border: 1px solid rgba(0,0,0,.28);
+      border-radius: 48% 52% 54% 46%;
+      animation: orbit-drift 12s ease-in-out infinite alternate;
+    }
+    .pine-note {
+      position: absolute;
+      z-index: 1;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(251,251,248,.78);
+      padding: 5px 0;
+      font-size: 9px;
+      line-height: 1;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      animation: floaty 8s ease-in-out infinite alternate;
+    }
+    .pn1 { right: 22px; top: 316px; transform: rotate(18deg); }
+    .pn2 { left: 8px; top: 586px; width: 28px; height: 46px; transform: rotate(-22deg); animation-delay: .5s; }
+    .pn3 { right: 52px; bottom: 132px; width: 42px; height: 66px; transform: rotate(-8deg); animation-delay: 1.1s; }
+    .pn4 { left: 308px; top: 420px; width: 26px; height: 42px; transform: rotate(38deg); animation-delay: .8s; }
+    .pr1 { width: 210px; height: 116px; right: -82px; top: 344px; transform: rotate(-18deg); }
+    .pr2 { width: 260px; height: 92px; left: -150px; bottom: 142px; transform: rotate(13deg); }
+    .pnote1 { right: 18px; top: 492px; transform: rotate(7deg); }
+    .pnote2 { left: 18px; bottom: 118px; transform: rotate(-6deg); }
+    @keyframes pine-drift {
+      to { translate: 9px -16px; rotate: 10deg; }
+    }
+    .big-cn {
+      margin: 18px 0 0;
+      font-family: var(--serif);
+      font-size: clamp(42px, 13vw, 62px);
+      line-height: .9;
+      letter-spacing: -.08em;
+      font-weight: 900;
+    }
+    .dense-copy {
+      position: relative;
+      z-index: 2;
+      margin-top: 22px;
+      display: grid;
+      gap: 10px;
+      max-width: 330px;
+    }
+    .dense-copy p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.58;
+      background: rgba(251,251,248,.72);
+    }
+    .chapter-card {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 58px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 8px;
+      padding-top: 12px;
+      background: rgba(251,251,248,.86);
+    }
+    .chapter-card b {
+      font-family: var(--serif);
+      font-size: 30px;
+      line-height: 1.16;
+      letter-spacing: -.06em;
+    }
+    .chapter-card small {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .life-map {
+      position: relative;
+      min-height: 620px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+    .life-title {
+      margin: 0;
+      max-width: 300px;
+      font-family: var(--serif);
+      font-size: 32px;
+      line-height: .98;
+      letter-spacing: -.07em;
+      font-weight: 900;
+    }
+    .life-lead {
+      margin: 10px 0 0;
+      max-width: 300px;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+    .route-svg {
+      position: absolute;
+      left: -16px;
+      top: 112px;
+      width: 430px;
+      height: 360px;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .route-svg path {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 9 9;
+      animation: route-move 13s linear infinite;
+    }
+    @keyframes route-move {
+      to { stroke-dashoffset: -120; }
+    }
+    .timeline-node {
+      position: absolute;
+      z-index: 2;
+      border: 2px solid var(--line);
+      background: #fff;
+      padding: 6px 8px;
+      min-width: 86px;
+      text-align: left;
+      font-family: var(--serif);
+      font-weight: 900;
+      line-height: .98;
+      box-shadow: 5px 5px 0 var(--line);
+    }
+    .timeline-node b {
+      display: block;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 20px;
+      line-height: .9;
+      letter-spacing: -.05em;
+    }
+    .timeline-node span {
+      display: block;
+      margin-top: 2px;
+      font-size: 15px;
+      letter-spacing: -.04em;
+      white-space: nowrap;
+    }
+    .timeline-node.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .n1 { left: 18px; top: 132px; }
+    .n2 { left: 212px; top: 160px; }
+    .n3 { left: 94px; top: 224px; }
+    .n4 { left: 246px; top: 282px; }
+    .n5 { left: 26px; top: 318px; }
+    .n6 { left: 190px; top: 346px; }
+    .n7 { left: 58px; top: 382px; }
+    .timeline-card {
+      position: absolute;
+      z-index: 4;
+      left: 12px;
+      right: 12px;
+      bottom: 8px;
+      height: 186px;
+      background: rgba(255,255,255,.94);
+      border: 2px solid var(--line);
+      padding: 10px 12px;
+      box-shadow: 7px 7px 0 var(--line);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .timeline-card .card-kicker {
+      display: block;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 26px;
+      line-height: .9;
+      letter-spacing: -.05em;
+      margin-bottom: 6px;
+    }
+    .timeline-card h3 {
+      margin: 0 0 6px;
+      font-family: var(--serif);
+      font-size: 25px;
+      line-height: .95;
+      letter-spacing: -.06em;
+    }
+    .timeline-card p {
+      margin: 0;
+      font-size: 10.5px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+    .service-stack {
+      position: relative;
+      z-index: 2;
+      margin-top: 24px;
+      display: grid;
+      gap: 16px;
+    }
+    .service-item {
+      min-height: 112px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 12px;
+      padding-top: 14px;
+      align-items: start;
+      background: rgba(251,251,248,.72);
+    }
+    .service-item .mark {
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 900;
+    }
+    .service-item b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 27px;
+      line-height: 1.13;
+      letter-spacing: -.06em;
+    }
+    .service-item small {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .service-item.feature {
+      border: 2px solid var(--line);
+      padding: 12px;
+      box-shadow: 6px 6px 0 var(--line);
+      grid-template-columns: 54px 1fr;
+      background: #fff;
+    }
+    .flow-strip {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 10px;
+      line-height: 1.2;
+      font-weight: 800;
+      text-align: center;
+    }
+    .flow-strip span {
+      padding: 8px 3px;
+      border-right: 1px solid rgba(255,255,255,.42);
+    }
+    .flow-strip span:last-child { border-right: 0; }
+    .price-board {
+      margin-top: 26px;
+      border-top: 1px solid var(--line);
+    }
+    .price-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: baseline;
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    .price-row b {
+      font-family: var(--serif);
+      font-size: 32px;
+      line-height: 1.15;
+      letter-spacing: -.06em;
+    }
+    .price-row strong {
+      font-size: 28px;
+      line-height: 1;
+    }
+    .fit-grid {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 86px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .fit-box {
+      min-height: 210px;
+      border: 2px solid var(--line);
+      padding: 12px 10px;
+      background: rgba(255,255,255,.62);
+    }
+    .fit-box b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -.06em;
+      margin-bottom: 14px;
+    }
+    .fit-box ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .fit-box li {
+      position: relative;
+      padding-left: 12px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .fit-box li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .55em;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+    .orbital {
+      position: absolute;
+      left: 50%;
+      top: 185px;
+      width: 460px;
+      height: 460px;
+      transform: translateX(-50%);
+      border: 1px solid var(--line);
+      border-radius: 48% 52% 45% 55%;
+      animation: wobble 12s ease-in-out infinite alternate;
+    }
+    .orbit-img {
+      position: absolute;
+      width: 86px;
+      height: 118px;
+      background:
+        radial-gradient(circle at 50% 25%, #111 0 11px, transparent 12px),
+        linear-gradient(150deg, #eee, #aaa);
+      opacity: 0;
+      animation: pop 8s steps(1) infinite;
+    }
+    .orbit-img:nth-child(1) { left: 28px; top: 24px; animation-delay: 0s; }
+    .orbit-img:nth-child(2) { right: 72px; top: 70px; animation-delay: 1s; }
+    .orbit-img:nth-child(3) { left: 120px; bottom: 30px; animation-delay: 2s; }
+    .orbit-img:nth-child(4) { right: 24px; bottom: 86px; animation-delay: 3s; }
+    @keyframes pop {
+      0%, 18% { opacity: .95; }
+      19%, 100% { opacity: 0; }
+    }
+    @keyframes wobble {
+      to { transform: translateX(-50%) rotate(12deg) scale(1.04); }
+    }
+    .link-button {
+      position: absolute;
+      right: 0;
+      bottom: 44px;
+      width: 245px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: #fff;
+      text-decoration: none;
+      font-size: 11px;
+      line-height: 1;
+      padding: 12px 0;
+      white-space: nowrap;
+    }
+    .link-button span {
+      display: inline-block;
+      padding-right: 18px;
+      animation: slide 7s linear infinite;
+    }
+    .guest-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .guest {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: end;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .guest .face {
+      width: 86px;
+      height: 86px;
+      background:
+        radial-gradient(circle at 50% 44%, #111 0 9px, transparent 10px),
+        radial-gradient(circle at 42% 36%, #111 0 2px, transparent 3px),
+        radial-gradient(circle at 58% 36%, #111 0 2px, transparent 3px),
+        linear-gradient(#eee, #aaa);
+      border-radius: 50%;
+      filter: grayscale(1);
+    }
+    .guest b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: .95;
+      letter-spacing: -.06em;
+    }
+    .guest small {
+      display: block;
+      margin-top: 5px;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .menu-panel {
+      position: fixed;
+      inset: auto 12px 50px;
+      z-index: 15;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 18px;
+      transform: translateY(120%);
+      transition: transform .35s ease;
+    }
+    .menu-panel.open { transform: translateY(0); }
+    .menu-panel a {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      font-size: 22px;
+      line-height: 1.1;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.28);
+    }
+    .qr-panel {
+      position: fixed;
+      inset: auto 12px 54px auto;
+      width: min(260px, calc(100vw - 24px));
+      z-index: 16;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 12px;
+      transform: translateY(18px) scale(.96);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .qr-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .qr-panel header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .qr-close {
+      border: 0;
+      background: transparent;
+      font-size: 18px;
+      line-height: 1;
+      padding: 0;
+    }
+    .qr-art {
+      width: 168px;
+      height: 168px;
+      margin: 0 auto 10px;
+      border: 10px solid #fff;
+      outline: 1px solid var(--line);
+      object-fit: cover;
+      display: block;
+      background: #fff;
+    }
+    .qr-panel p {
+      margin: 0;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" aria-hidden="true">
+    <div class="loader-logo">宋子松 pino まつのみ</div>
+    <div class="loader-grid"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="loader-copy">世界は広い。<br>でも、入口は小さくていい。</div>
+  </div>
+
+  <div class="page">
+    <header class="topbar">
+      <button class="pill" type="button" id="soundBtn">
+        <span class="thumb"></span>
+        <span class="marquee"><span>PINO IS A GOOD PERSON PINO IS A GOOD PERSON</span></span>
+      </button>
+      <a class="logo-pill" href="#top">宋子松 pino まつのみ</a>
+      <a class="latest" href="#who"><span class="marquee"><span>HE CAN ALSO BE A BAD PERSON HE CAN ALSO BE A BAD PERSON</span></span></a>
+    </header>
+
+    <footer class="bottombar">
+      <a class="producer" href="https://zisongsong.github.io/yikesong-personal-intro/">一棵松个人介绍页 ↗</a>
+      <button class="menu-btn" type="button" id="menuBtn">MENU</button>
+      <button class="contact-mini" type="button" id="contactBtn">CONTACT</button>
+    </footer>
+
+    <main id="top">
+      <section class="hero">
+        <h1>OFF TRACK,<br>ON PURPOSE,<br>IN LIFE</h1>
+        <div class="archive-wall" aria-hidden="true">
+          <div class="archive-card a1">
+            <span class="issue">#026</span>
+            <span class="headline">想进入世界，<br>也保留距离</span>
+            <span class="arrow">→</span>
+          </div>
+          <div class="archive-card a2 thin">
+            <span class="vertical">用作品证明自己存在过。不是被定义，而是自己命名自己。</span>
+          </div>
+          <div class="archive-card a3">
+            <span class="issue">#037<span class="tag">作品</span></span>
+            <span class="headline compact">把混乱熬成作品，<br>把经历变成能被看见的东西</span>
+          </div>
+          <div class="archive-card a4">
+            <span class="issue">#135</span>
+            <span class="headline">把生活里的判断，<br>做成入口</span>
+            <span class="arrow">→</span>
+          </div>
+          <div class="archive-card a5">
+            <span class="issue">#379</span>
+            <span class="headline compact">一个人的经历，<br>也可以长成公司</span>
+          </div>
+          <div class="archive-card a6 thin">
+            <span class="vertical">世界很大，但入口可以很小。</span>
+          </div>
+          <div class="archive-card a7 thin">
+            <span class="smallcopy strong">我想把自己喜欢的事，做成真正的生意。</span>
+          </div>
+          <div class="archive-card a8 thin">
+            <span class="smallcopy strong">个人介绍页，<br>不只是自我介绍。</span>
+          </div>
+          <div class="archive-card a9 thin">
+            <span class="vertical">表达自己，就是在建立信任。</span>
+          </div>
+          <div class="archive-card a10">
+            <span class="issue">#026<span class="tag">PINO</span></span>
+          </div>
+          <div class="archive-card a11 thin">
+            <span class="vertical">你的经历，本身就是资产。</span>
+          </div>
+          <div class="cursor-hand"></div>
+        </div>
+        <div class="future-strip" aria-hidden="true">
+          <span class="future-text">未来每个人<br>都是一个品牌</span>
+          <span class="future-art"></span>
+          <span class="future-label">One Person Company</span>
+        </div>
+        <div class="collage-field" aria-hidden="true">
+          <div class="track t1"></div>
+          <div class="track t2"></div>
+          <div class="track t3"></div>
+          <div class="track t4"></div>
+          <div class="cut c1"></div>
+          <div class="cut c2"></div>
+          <div class="cut c3"></div>
+          <div class="cut c4"></div>
+          <div class="cut c5"></div>
+          <div class="cut c6"></div>
+          <div class="cut c7"></div>
+          <div class="cut c8"></div>
+          <div class="cut c9"></div>
+          <div class="cut c10"></div>
+          <div class="mini-still mstill1"></div>
+          <div class="mini-still mstill2"></div>
+          <div class="mini-still mstill3"></div>
+          <div class="mini-still mstill4"></div>
+          <div class="mini-still mstill5"></div>
+          <div class="ring r1">松子</div>
+          <div class="ring r2">잣</div>
+          <div class="ring r3">pignon</div>
+          <div class="ring r4">piñón</div>
+          <div class="micro-copy mc1">NOT A STRAIGHT PATH / BUT STILL MOVING</div>
+          <div class="micro-copy mc2">VOICE NOTES, DETOURS, AND SMALL DECISIONS</div>
+          <div class="micro-copy mc4">SCROLL TO COLLECT THE STORY</div>
+        </div>
+        <div class="video-card v1"></div>
+        <div class="video-card v2"></div>
+        <div class="video-card v3"></div>
+        <div class="video-card v4"></div>
+        <div class="video-card v5"></div>
+        <div class="video-card v6"></div>
+        <div class="stamp s1">Pinienkern</div>
+        <div class="stamp s2">pinolo</div>
+        <div class="stamp s3">pinhão</div>
+        <div class="stamp s4">кедровый<br>орех</div>
+        <div class="stamp s5">صنوبر</div>
+        <div class="subcopy">这是宋子松的个人介绍页，<br>可以在这里了解我是谁、我能提供什么服务。</div>
+      </section>
+
+      <section class="section" id="who">
+        <h2>WHO AM I</h2>
+        <div class="jp">我是誰</div>
+        <div class="page-kicker">PAGE<br>02</div>
+        <article class="life-map">
+          <h3 class="life-title">从没走过直线，只有一条歪歪扭扭的路</h3>
+          <p class="life-lead">不知道从什么时候开始，「做一个合格的大人」就成了我这辈子最不可能实现的事儿</p>
+          <svg class="route-svg" viewBox="0 0 430 410" aria-hidden="true">
+            <path d="M54 34 C210 8 298 76 202 132 C94 194 42 164 108 254 C180 352 338 248 354 374" />
+          </svg>
+          <button class="timeline-node n1 active" type="button" data-step="movie"><b>01</b><span>电影梦</span></button>
+          <button class="timeline-node n2" type="button" data-step="major"><b>02</b><span>工程管理</span></button>
+          <button class="timeline-node n3" type="button" data-step="dali"><b>03</b><span>大理</span></button>
+          <button class="timeline-node n4" type="button" data-step="sales"><b>04</b><span>销售</span></button>
+          <button class="timeline-node n5" type="button" data-step="content"><b>05</b><span>内容创作</span></button>
+          <button class="timeline-node n6" type="button" data-step="aiwork"><b>06</b><span>AI 内容工作</span></button>
+          <button class="timeline-node n7" type="button" data-step="yikesong"><b>07</b><span>一棵松</span></button>
+          <div class="timeline-card" id="timelineCard">
+            <span class="card-kicker">01</span>
+            <h3>电影梦</h3>
+            <p>高中时，开始想拍电影，那时候我以为人生会按一个目标展开，后来发现，目标也会背叛人。两次与北京电影学院失之交臂，不过也很早开始训练审美、叙事、镜头感和对人的观察。</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="what">
+        <h2>WHAT I DO</h2>
+        <div class="jp">我做什麼</div>
+        <div class="page-kicker">PAGE<br>03</div>
+        <div class="pine-float" aria-hidden="true">
+          <span class="pine-ring pr1"></span>
+          <span class="pine-ring pr2"></span>
+          <span class="pine-nut pn1"></span>
+          <span class="pine-nut pn2"></span>
+          <span class="pine-nut pn3"></span>
+          <span class="pine-note pnote1">PINE NUT / PERSONAL ASSET</span>
+        </div>
+        <article class="highlight-card">
+          <div class="num">#02</div>
+          <h3>把经历、内容<br>做成可交付产品</h3>
+          <div class="dense-copy">
+            <p>我能变现的不是某一个工具，而是把经历、表达、审美、AI 协作和商业判断重新组织成一个产品入口。</p>
+            <p>我会先把一个人讲清楚：你是谁、做过什么、有什么证据、能提供什么、别人为什么应该信你。</p>
+            <p>再把这些内容变成可以传播、可以成交、可以继续升级的网页、内容资产库和 AI 内容生产系统。</p>
+          </div>
+          <div class="chapter-card">
+            <b>我的能力不是单点技能，是把混乱材料整理成商业表达。</b>
+            <small>个人经历结构化 / 内容表达 / 视觉打板 / AI 工作流 / 一人公司产品化。</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="services">
+        <h2>SERVICE</h2>
+        <div class="jp">產品服務內容</div>
+        <div class="page-kicker">PAGE<br>04</div>
+        <div class="pine-float" aria-hidden="true">
+          <span class="pine-ring pr1"></span>
+          <span class="pine-ring pr2"></span>
+          <span class="pine-nut pn1"></span>
+          <span class="pine-nut pn2"></span>
+          <span class="pine-nut pn4"></span>
+          <span class="pine-note pnote2">SMALL SEED / REAL BUSINESS</span>
+        </div>
+        <div class="service-stack">
+          <article class="service-item feature">
+            <div class="mark">01</div>
+            <div><b>初级产品：品牌定位 + 个人介绍页</b><small>先用一次轻量访谈，把你是谁、卖什么、给谁看、用户看完要做什么整理清楚，再做成一个可扫码、可转发、可商用的手机版网页入口。</small>
+              <div class="flow-strip"><span>访谈</span><span>整理</span><span>设计</span><span>交付</span></div>
+            </div>
+          </article>
+          <article class="service-item">
+            <div class="mark">02</div>
+            <div><b>中级产品：个人 IP 资产整理 + 内容资产库</b><small>不只是做一页介绍，而是把经历、观点、案例、选题、作品证据整理成可持续复用的个人 IP 素材库。</small></div>
+          </article>
+          <article class="service-item">
+            <div class="mark">03</div>
+            <div><b>高级产品：AI 内容生产系统</b><small>把选题、素材、文案、发布、复盘这些动作拆成流程，让 AI 不只是生成内容，而是参与一套稳定的内容生产系统。</small></div>
+          </article>
+          <article class="service-item">
+            <div class="mark">04</div>
+            <div><b>一人公司产品化陪跑 / 咨询</b><small>从“我会很多东西”走到“我有清楚的产品、价格、交付边界和成交路径”，适合已经想把个人能力做成生意的人。</small></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="price">
+        <h2>PRICE</h2>
+        <div class="jp">價格與適配</div>
+        <div class="page-kicker">PAGE<br>05</div>
+        <div class="price-board">
+          <div class="price-row"><b>正式单页<br>手机版网页</b><strong>¥999</strong></div>
+          <div class="price-row"><b>前 3 个<br>体验价</b><strong>¥399</strong></div>
+          <div class="price-row"><b>交付内容</b><strong>网页+二维码</strong></div>
+        </div>
+        <div class="fit-grid">
+          <div class="fit-box">
+            <b>适合谁</b>
+            <ul>
+              <li>个人 IP</li>
+              <li>自由职业者</li>
+              <li>咨询师</li>
+              <li>主理人</li>
+              <li>小工作室</li>
+              <li>有明确产品但缺介绍页的人</li>
+            </ul>
+          </div>
+          <div class="fit-box">
+            <b>不适合谁</b>
+            <ul>
+              <li>还不知道自己卖什么</li>
+              <li>只想要便宜模板</li>
+              <li>无法提供基本文字素材</li>
+              <li>需要后台系统</li>
+              <li>需要支付或预约功能</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="menu-panel" id="menuPanel" aria-label="menu">
+      <a href="#top">(1) OPENING</a>
+      <a href="#who">(2) WHO AM I</a>
+      <a href="#what">(3) WHAT I DO</a>
+      <a href="#services">(4) SERVICE</a>
+      <a href="#price">(5) PRICE</a>
+    </nav>
+
+    <aside class="qr-panel" id="qrPanel" aria-label="contact qr">
+      <header>
+        <span>扫码联系 / CONTACT</span>
+        <button class="qr-close" type="button" id="qrClose" aria-label="close">×</button>
+      </header>
+      <img class="qr-art" src="assets/song-zisong-wechat-qr.jpg" alt="宋子松微信二维码">
+      <p>微信号：outlierszs</p>
+    </aside>
+  </div>
+
+  <script>
+    const menuBtn = document.querySelector("#menuBtn");
+    const menuPanel = document.querySelector("#menuPanel");
+    const contactBtn = document.querySelector("#contactBtn");
+    const qrPanel = document.querySelector("#qrPanel");
+    const qrClose = document.querySelector("#qrClose");
+    menuBtn.addEventListener("click", () => menuPanel.classList.toggle("open"));
+    menuPanel.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => menuPanel.classList.remove("open"));
+    });
+    contactBtn.addEventListener("click", () => qrPanel.classList.toggle("open"));
+    qrClose.addEventListener("click", () => qrPanel.classList.remove("open"));
+    document.querySelector("#soundBtn").addEventListener("click", (event) => {
+      event.currentTarget.classList.toggle("is-on");
+      event.currentTarget.style.filter = event.currentTarget.classList.contains("is-on") ? "invert(1)" : "";
+    });
+    const timelineData = {
+      movie: {
+        num: "01",
+        title: "电影梦",
+        body: "高中时，开始想拍电影，那时候我以为人生会按一个目标展开，后来发现，目标也会背叛人。两次与北京电影学院失之交臂，不过也很早开始训练审美、叙事、镜头感和对人的观察。"
+      },
+      major: {
+        num: "02",
+        title: "工程管理",
+        body: "作为理科生还是喜欢物理和数学的，在济南大学我读了这个很现实的专业，它和电影很远，和我想象中的自己也很远，但它让我第一次意识到，人不能只活在脑子里的世界。"
+      },
+      dali: {
+        num: "03",
+        title: "大理",
+        body: "大学毕业我去了大理，那段时间没有标准答案，只有具体的生活、具体的际遇。我拍了好多短片，写了好多文章，去山里闭关两个月、去酒吧/酸奶店/茶室打工、开了摄影工作室、自编自导自演话剧，还把自己混成了数字游民，结识了或学院派或野生的导演、诗人、画家、摄影师、作曲家、小说家，还有身心灵教主、网红流浪汉、过气演员、神秘黑客，不同生命阶段、不同阶层的人。我的世界被打开了，我开始觉得，人不是标签，人是处境。也真正意识到，我当不了文艺青年，过不了「出世」的生活。人在没有拿起过什么之前，没资格说放下。"
+      },
+      sales: {
+        num: "04",
+        title: "销售",
+        body: "从大理到成都，开始好好学习「入世」，做过保险销售，也做过食品原料销售。这两段经历让我直面真实客户、真实的拒绝和信任。我不再只是表达自己，开始更在意人为什么犹豫、为什么恐惧、为什么而买单。"
+      },
+      content: {
+        num: "05",
+        title: "内容创作",
+        body: "我一直在做内容，或视频或文章，从来没有真正停过，因为停不下来。公众号更了150多篇，也有过全平台 30 万播放、2 万点赞的单条视频，开始研究一条内容如何从情绪、观点，变成别人愿意看完的结构。不过依然没有探索出正确的商业导向。"
+      },
+      aiwork: {
+        num: "06",
+        title: "AI 内容工作",
+        body: "通过俩月自学AI编程，获得了一份MCN公司的工作，在内容团队里做AI+IP运营，每天泡在真实业务里训练AI 协作、内容判断和交付能力。我知道这是个能学到东西的平台，但还是会别扭，于是我的算命skill告诉我：「进系统学习，出系统立命」。不追求AI Native，只追求AI Creative，没有所谓的AI赋能，都是注定的而已。"
+      },
+      yikesong: {
+        num: "07",
+        title: "一棵松",
+        body: "我正在把这些经历里有价值的部分整合成自己的个人品牌，它不只是一个账号，而是我审美、判断、内容、AI 和商业能力产品化的入口，希望未来能创造真实的商业价值。失败无数次，归来仍是大傻子。时至今日，我终于明白，ai替代不了我的那部分，就是我的失败，因为我正在把失败、经验、判断和审美组织成可视化的产品。可能这就是所谓的韧性。"
+      }
+    };
+    const timelineCard = document.querySelector("#timelineCard");
+    const timelineNodes = document.querySelectorAll(".timeline-node");
+    function showTimeline(step) {
+      const item = timelineData[step];
+      if (!item || !timelineCard) return;
+      timelineCard.innerHTML = `<span class="card-kicker">${item.num}</span><h3>${item.title}</h3><p>${item.body}</p>`;
+      timelineCard.scrollTop = 0;
+      timelineNodes.forEach((node) => node.classList.toggle("active", node.dataset.step === step));
+    }
+    timelineNodes.forEach((node) => {
+      node.addEventListener("click", () => showTimeline(node.dataset.step));
+      node.addEventListener("mouseenter", () => showTimeline(node.dataset.step));
+    });
+  </script>
+</body>
+</html>
