@@ -760,7 +760,7 @@
     }
     .chapter-card b {
       font-family: var(--serif);
-      font-size: 30px;
+      font-size: 27px;
       line-height: 1.16;
       letter-spacing: -.06em;
     }
@@ -849,6 +849,21 @@
     .n5 { left: 26px; top: 318px; }
     .n6 { left: 190px; top: 346px; }
     .n7 { left: 58px; top: 382px; }
+    .timeline-hint {
+      position: absolute;
+      z-index: 3;
+      right: 0;
+      top: 86px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.86);
+      color: var(--ink);
+      padding: 5px 8px;
+      font-size: 10px;
+      line-height: 1.25;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 4px 4px 0 var(--line);
+    }
     .timeline-card {
       position: absolute;
       z-index: 4;
@@ -975,15 +990,15 @@
       position: absolute;
       left: 12px;
       right: 12px;
-      bottom: 86px;
+      bottom: 72px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1.32fr) minmax(0, .88fr);
       gap: 12px;
     }
     .fit-box {
-      min-height: 210px;
+      min-height: 190px;
       border: 2px solid var(--line);
-      padding: 12px 10px;
+      padding: 10px 9px;
       background: rgba(255,255,255,.62);
     }
     .fit-box b {
@@ -999,13 +1014,13 @@
       padding: 0;
       list-style: none;
       display: grid;
-      gap: 8px;
+      gap: 6px;
     }
     .fit-box li {
       position: relative;
       padding-left: 12px;
-      font-size: 13px;
-      line-height: 1.35;
+      font-size: 12px;
+      line-height: 1.28;
       font-weight: 800;
     }
     .fit-box li::before {
@@ -1313,6 +1328,7 @@
           <button class="timeline-node n5" type="button" data-step="content"><b>05</b><span>内容创作</span></button>
           <button class="timeline-node n6" type="button" data-step="aiwork"><b>06</b><span>AI 内容工作</span></button>
           <button class="timeline-node n7" type="button" data-step="yikesong"><b>07</b><span>一棵松</span></button>
+          <div class="timeline-hint">点击每个数字框<br>可以看到详细内容</div>
           <div class="timeline-card" id="timelineCard">
             <span class="card-kicker">01</span>
             <h3>电影梦</h3>
