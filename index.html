@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Nippori Clean-room Sample</title>
+  <title>宋子松｜IP 内容操盘 · 内容编导 · 内容运营</title>
+  <meta name="robots" content="noindex,nofollow">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     :root {
@@ -218,19 +219,19 @@
     }
     .subcopy {
       position: absolute;
-      left: 20px;
-      right: 20px;
+      left: 72px;
+      right: 72px;
       bottom: 92px;
       z-index: 4;
-      padding: 10px 12px;
+      padding: 6px 8px;
       background: rgba(251, 251, 248, .9);
       border: 1px solid var(--line);
       text-align: center;
       font-family: var(--serif);
-      font-size: 16px;
-      line-height: 1.65;
-      font-weight: 900;
-      letter-spacing: -.04em;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: -.025em;
     }
     .video-card {
       position: absolute;
@@ -417,7 +418,7 @@
       display: block;
       max-width: 218px;
       font-family: var(--serif);
-      font-size: 34px;
+      font-size: 28px;
       line-height: 1.08;
       letter-spacing: -.08em;
       font-weight: 900;
@@ -768,6 +769,593 @@
       font-size: 12px;
       line-height: 1.4;
     }
+    #what {
+      padding-bottom: 112px;
+    }
+    .evidence-board {
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+    .evidence-section + .evidence-section {
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 2px solid var(--line);
+    }
+    .evidence-heading {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .evidence-heading .index {
+      border: 1px solid var(--line);
+      padding: 5px 7px;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+    .evidence-heading h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1.08;
+      letter-spacing: -.055em;
+    }
+    .evidence-heading p {
+      grid-column: 2;
+      margin: -3px 0 0;
+      color: #5e5d57;
+      font-size: 11px;
+      line-height: 1.55;
+      letter-spacing: .015em;
+    }
+    .click-hint {
+      grid-column: 2;
+      justify-self: start;
+      margin-top: 1px;
+      border: 1px solid #92918c;
+      background: rgba(232,231,224,.78);
+      color: #66655f;
+      padding: 5px 7px;
+      font-size: 8.5px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .04em;
+      box-shadow: 2px 2px 0 rgba(0,0,0,.13);
+      transform: rotate(.6deg);
+    }
+    .click-badge {
+      position: absolute;
+      z-index: 8;
+      top: -9px;
+      right: 7px;
+      border: 2px solid var(--line);
+      background: #d8d7d0;
+      color: var(--ink);
+      padding: 5px 7px 4px;
+      font-family: var(--sans);
+      font-size: 8.5px;
+      line-height: 1;
+      font-style: normal;
+      font-weight: 900;
+      letter-spacing: .04em;
+      white-space: nowrap;
+      box-shadow: 2px 2px 0 var(--line);
+      transform: rotate(4deg);
+      animation: click-tag-pulse 2.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .click-badge.heavy {
+      top: 8px;
+      right: 8px;
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--paper);
+      box-shadow: 3px 3px 0 rgba(5,5,5,.68);
+      font-size: 9px;
+      padding: 6px 8px 5px;
+    }
+    @keyframes clickable-card-arrival {
+      0% { transform: translateY(0); box-shadow: 6px 6px 0 var(--line); }
+      42% { transform: translate(-3px, -5px); box-shadow: 10px 11px 0 var(--line); }
+      100% { transform: translateY(0); box-shadow: 6px 6px 0 var(--line); }
+    }
+    .account-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px 10px;
+    }
+    .account-card {
+      position: relative;
+      min-width: 0;
+      border: 1.5px solid var(--line);
+      background: rgba(255,255,255,.94);
+      color: inherit;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 var(--line);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .account-card:hover,
+    .account-card:focus-visible {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--line);
+    }
+    .account-shot {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1.5px solid var(--line);
+      display: block;
+      background: #171821;
+    }
+    .case-cover::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border: 1px dashed rgba(5,5,5,.52);
+      pointer-events: none;
+    }
+    .account-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .account-shot span {
+      position: relative;
+      z-index: 1;
+      max-width: 100px;
+      padding: 5px 7px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      font-family: var(--sans);
+      font-size: 8px;
+      line-height: 1.3;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-align: center;
+    }
+    .account-meta {
+      min-height: 72px;
+      padding: 7px;
+      display: grid;
+      align-content: start;
+      gap: 4px;
+    }
+    .account-meta .account-index {
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .05em;
+    }
+    .account-meta strong {
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.05;
+      letter-spacing: -.045em;
+    }
+    .account-meta small {
+      color: #66655f;
+      font-size: 8.5px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+    .account-link-note {
+      margin-top: auto;
+      padding: 6px 7px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 8px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+    .case-list {
+      display: grid;
+      gap: 20px;
+    }
+    .case-card {
+      position: relative;
+      display: block;
+      border: 2px solid var(--line);
+      background: rgba(255,255,255,.95);
+      color: inherit;
+      text-decoration: none;
+      box-shadow: 6px 6px 0 var(--line);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .case-card.is-click-visible {
+      animation: clickable-card-arrival .72s ease-out both;
+    }
+    .case-card:hover,
+    .case-card:focus-visible {
+      transform: translate(-3px, -3px);
+      box-shadow: 10px 10px 0 var(--line);
+    }
+    .case-card:focus-visible {
+      outline: 3px solid #92918c;
+      outline-offset: 4px;
+    }
+    .case-cover {
+      position: relative;
+      min-height: 184px;
+      padding: 18px;
+      border-bottom: 2px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: inherit;
+      text-decoration: none;
+      background:
+        linear-gradient(110deg, transparent 0 48%, rgba(5,5,5,.08) 49% 51%, transparent 52%),
+        repeating-linear-gradient(0deg, #f7f6f0 0 18px, #e2e0d8 18px 19px);
+    }
+    .case-cover.has-image {
+      min-height: 0;
+      padding: 0;
+      display: block;
+      background: #e6ead8;
+    }
+    .case-cover.has-image::before {
+      display: none;
+    }
+    .case-cover.has-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .case-cover-label {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 240px);
+      border: 2px solid var(--line);
+      background: var(--paper);
+      padding: 14px 12px;
+      text-align: center;
+      box-shadow: 5px 5px 0 var(--line);
+    }
+    .case-cover-label b {
+      display: block;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+    .case-cover-label small {
+      display: block;
+      margin-top: 6px;
+      font-size: 9px;
+      line-height: 1.35;
+      font-weight: 800;
+      letter-spacing: .06em;
+    }
+    .case-copy {
+      padding: 12px;
+    }
+    .case-copy .case-kicker {
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+    .case-copy h4 {
+      margin: 7px 0 10px;
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.08;
+      letter-spacing: -.055em;
+    }
+    .case-summary {
+      border-top: 1px solid var(--line);
+    }
+    .case-summary-row {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(5,5,5,.34);
+      font-size: 10.5px;
+      line-height: 1.45;
+    }
+    .case-summary-row b {
+      font-family: var(--serif);
+      font-size: 12px;
+    }
+    .case-summary-row span {
+      color: #66655f;
+    }
+    .case-html-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 7px 9px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 9px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-decoration: none;
+    }
+    .case-html-note span:last-child,
+    .role-links a span:last-child {
+      display: inline-block;
+      animation: evidence-arrow-nudge 1.8s ease-in-out infinite;
+    }
+    @keyframes evidence-arrow-nudge {
+      0%, 72%, 100% { transform: translate(0, 0); }
+      84% { transform: translate(3px, -3px); }
+    }
+    .interview-case {
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background: rgba(255,255,255,.95);
+      box-shadow: 6px 6px 0 var(--line);
+    }
+    .interview-case-top {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+      min-height: 224px;
+    }
+    .interview-proof {
+      padding: 13px 11px;
+      display: flex;
+      flex-direction: column;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .interview-proof-kicker {
+      font-size: 8px;
+      line-height: 1.25;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .interview-count {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      margin: 16px 0 5px;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      line-height: .8;
+      letter-spacing: -.07em;
+    }
+    .interview-count strong {
+      font-size: 58px;
+      font-weight: 900;
+    }
+    .interview-count span {
+      padding-bottom: 4px;
+      font-size: 19px;
+      font-weight: 900;
+    }
+    .interview-progress {
+      margin: 0;
+      color: rgba(251,251,248,.72);
+      font-size: 9px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .interview-tags {
+      margin-top: auto;
+      display: grid;
+      gap: 5px;
+    }
+    .interview-tags span {
+      padding-top: 5px;
+      border-top: 1px solid rgba(251,251,248,.38);
+      font-size: 8.5px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+    .interview-stack {
+      position: relative;
+      min-width: 0;
+      min-height: 224px;
+      overflow: hidden;
+      border: 0;
+      border-left: 2px solid var(--line);
+      padding: 0;
+      background:
+        repeating-linear-gradient(135deg, #eeece5 0 16px, #dad7cf 16px 17px);
+      color: inherit;
+      cursor: pointer;
+    }
+    .interview-stack::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px dashed rgba(5,5,5,.46);
+    }
+    .interview-stack img {
+      position: absolute;
+      top: 20px;
+      width: 48%;
+      height: 166px;
+      object-fit: cover;
+      object-position: top;
+      border: 1px solid var(--line);
+      background: #111;
+      box-shadow: 4px 4px 0 rgba(5,5,5,.78);
+    }
+    .interview-stack img:nth-child(1) {
+      left: 11px;
+      transform: rotate(-4deg);
+    }
+    .interview-stack img:nth-child(2) {
+      left: 27%;
+      top: 15px;
+      transform: rotate(2deg);
+    }
+    .interview-stack img:nth-child(3) {
+      right: 10px;
+      top: 25px;
+      transform: rotate(5deg);
+    }
+    .interview-stack-cta {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      font-size: 8px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+    .interview-click-badge {
+      top: 9px;
+      right: 9px;
+      z-index: 4;
+      font-size: 8px;
+    }
+    .interview-case-copy {
+      padding: 12px;
+      border-top: 2px solid var(--line);
+    }
+    .interview-case-copy p {
+      margin: 0;
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: #55544f;
+    }
+    .interview-quote {
+      margin: 11px 0 0;
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      background: #efeee8;
+    }
+    .interview-quote p {
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.35;
+      letter-spacing: -.035em;
+      font-weight: 900;
+    }
+    .interview-quote cite {
+      display: block;
+      margin-top: 6px;
+      font-size: 8px;
+      line-height: 1.3;
+      font-style: normal;
+      font-weight: 900;
+      letter-spacing: .05em;
+    }
+    .interview-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+    }
+    .interview-modal[aria-hidden="true"] {
+      display: none;
+    }
+    .interview-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(5,5,5,.9);
+      backdrop-filter: blur(4px);
+    }
+    .interview-dialog {
+      position: relative;
+      width: min(100%, 460px);
+      height: min(92dvh, 900px);
+      border: 2px solid var(--paper);
+      background: #111;
+      color: var(--paper);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      box-shadow: 9px 9px 0 rgba(251,251,248,.2);
+    }
+    .interview-dialog-head {
+      min-height: 47px;
+      padding: 8px 9px 8px 11px;
+      border-bottom: 1px solid rgba(251,251,248,.45);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .interview-dialog-head span {
+      font-size: 9px;
+      line-height: 1.3;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+    .interview-dialog-close {
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(251,251,248,.7);
+      background: transparent;
+      color: inherit;
+      font-size: 19px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .interview-gallery {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) 36px;
+      align-items: stretch;
+    }
+    .interview-gallery figure {
+      min-width: 0;
+      min-height: 0;
+      margin: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+    }
+    .interview-gallery img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: contain;
+      background: #111;
+    }
+    .interview-gallery figcaption {
+      min-height: 42px;
+      padding: 7px 8px;
+      border-top: 1px solid rgba(251,251,248,.4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 8px;
+      line-height: 1.3;
+      font-weight: 900;
+      letter-spacing: .05em;
+    }
+    .interview-gallery-nav {
+      border: 0;
+      border-right: 1px solid rgba(251,251,248,.25);
+      background: transparent;
+      color: inherit;
+      font-size: 21px;
+      cursor: pointer;
+    }
+    .interview-gallery-nav.next {
+      border-right: 0;
+      border-left: 1px solid rgba(251,251,248,.25);
+    }
+    body.interview-open {
+      overflow: hidden;
+    }
     .life-map {
       position: relative;
       min-height: 620px;
@@ -778,24 +1366,59 @@
       margin: 0;
       max-width: 300px;
       font-family: var(--serif);
-      font-size: 28px;
-      line-height: .98;
       letter-spacing: -.07em;
       font-weight: 900;
     }
+    .life-title-identity {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+    }
+    .life-title-drive {
+      display: block;
+      margin-top: 7px;
+      font-size: 15px;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+    #who > h2,
+    #what > h2,
+    #services > h2 {
+      font-size: 40px;
+      line-height: .9;
+      letter-spacing: -.03em;
+    }
+    #who > .jp,
+    #what > .jp,
+    #services > .jp {
+      margin: 3px 0 30px 8px;
+    }
     .life-lead {
-      margin: 10px 0 0;
-      max-width: 300px;
-      font-size: 12px;
-      line-height: 1.45;
-      font-weight: 700;
+      position: absolute;
+      z-index: 5;
+      right: 0;
+      top: 61px;
+      width: 132px;
+      margin: 0;
+      color: #85847e;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      font-size: 8.8px;
+      line-height: 1.6;
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: .035em;
+      text-align: right;
+    }
+    .life-lead span {
+      display: block;
+      white-space: nowrap;
     }
     .route-svg {
       position: absolute;
-      left: -16px;
-      top: 112px;
-      width: 430px;
-      height: 360px;
+      left: -4px;
+      top: 136px;
+      width: 148px;
+      height: 420px;
       z-index: 0;
       pointer-events: none;
     }
@@ -807,6 +1430,7 @@
       stroke-linejoin: round;
       stroke-dasharray: 9 9;
       animation: route-move 13s linear infinite;
+      vector-effect: non-scaling-stroke;
     }
     @keyframes route-move {
       to { stroke-dashoffset: -120; }
@@ -823,11 +1447,59 @@
       font-weight: 900;
       line-height: .98;
       box-shadow: 5px 5px 0 var(--line);
+      cursor: pointer;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      transform: rotate(var(--tilt, 0deg));
+      -webkit-tap-highlight-color: transparent;
+    }
+    .timeline-node.rich {
+      min-width: 94px;
+      padding: 7px 9px;
+    }
+    .timeline-node.plain {
+      min-width: 70px;
+      padding: 4px 7px;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+    .timeline-node::after {
+      content: "点开";
+      position: absolute;
+      right: -12px;
+      top: -11px;
+      padding: 4px 6px 3px;
+      border: 2px solid var(--line);
+      background: #d8d7d0;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 9px;
+      line-height: 1;
+      letter-spacing: .08em;
+      white-space: nowrap;
+      box-shadow: 2px 2px 0 var(--line);
+      transform: rotate(5deg);
+      animation: click-tag-pulse 1.8s ease-in-out infinite;
+    }
+    .timeline-node:hover,
+    .timeline-node:focus-visible {
+      transform: translate(-2px, -2px) rotate(var(--tilt, 0deg));
+      box-shadow: 8px 8px 0 var(--line);
+    }
+    .timeline-node:focus-visible {
+      outline: 3px solid #9c9b95;
+      outline-offset: 4px;
+    }
+    .timeline-node:active {
+      transform: translate(3px, 3px) rotate(var(--tilt, 0deg));
+      box-shadow: 2px 2px 0 var(--line);
+    }
+    @keyframes click-tag-pulse {
+      0%, 100% { transform: rotate(5deg) scale(1); }
+      50% { transform: rotate(1deg) scale(1.12); }
     }
     .timeline-node b {
       display: block;
       font-family: "Arial Narrow", Impact, var(--sans);
-      font-size: 20px;
+      font-size: 16px;
       line-height: .9;
       letter-spacing: -.05em;
     }
@@ -838,50 +1510,413 @@
       letter-spacing: -.04em;
       white-space: nowrap;
     }
+    .timeline-node.rich b {
+      font-size: 21px;
+    }
+    .timeline-node.rich span {
+      font-size: 15.5px;
+    }
+    .timeline-node.plain b {
+      font-size: 17px;
+    }
+    .timeline-node.plain span {
+      font-size: 13px;
+    }
+    .timeline-node.plain::after {
+      right: -10px;
+      top: -9px;
+      padding: 3px 5px 2px;
+      font-size: 8px;
+    }
     .timeline-node.active {
       background: var(--ink);
       color: var(--paper);
     }
-    .n1 { left: 18px; top: 132px; }
-    .n2 { left: 212px; top: 160px; }
-    .n3 { left: 94px; top: 224px; }
-    .n4 { left: 246px; top: 282px; }
-    .n5 { left: 26px; top: 318px; }
-    .n6 { left: 190px; top: 346px; }
-    .n7 { left: 58px; top: 382px; }
+    .timeline-node.active::after {
+      content: "已展开";
+      background: var(--paper);
+      color: var(--ink);
+      animation: none;
+    }
+    .timeline-node.active::before {
+      content: "";
+      position: absolute;
+      left: calc(100% + 4px);
+      top: 50%;
+      width: 58px;
+      border-top: 2px dashed var(--line);
+      transform: translateY(-50%);
+      z-index: -1;
+    }
+    .n1 { left: 2px; top: 152px; --tilt: -1deg; }
+    .n2 { left: 56px; top: 215px; --tilt: 1.8deg; }
+    .n3 { left: 5px; top: 268px; --tilt: .7deg; }
+    .n4 { left: 45px; top: 329px; --tilt: -1.3deg; }
+    .n5 { left: 0; top: 392px; --tilt: .8deg; }
+    .n6 { left: 56px; top: 463px; --tilt: -1.8deg; }
     .timeline-hint {
       position: absolute;
-      z-index: 5;
-      right: 20px;
-      bottom: 172px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.86);
-      color: var(--ink);
-      padding: 5px 8px;
-      font-size: 10px;
-      line-height: 1.25;
+      z-index: 6;
+      left: auto;
+      right: 0;
+      top: 10px;
+      bottom: auto;
+      width: 96px;
+      border: 1px solid #92918c;
+      background: rgba(232,231,224,.74);
+      color: #66655f;
+      padding: 6px 7px;
+      font-size: 9px;
+      line-height: 1.35;
       font-weight: 800;
       text-align: center;
-      box-shadow: 4px 4px 0 var(--line);
+      letter-spacing: .03em;
+      box-shadow: 3px 3px 0 rgba(0,0,0,.13);
+      transform: rotate(1deg);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .timeline-node::after,
+      .timeline-hint {
+        animation: none;
+      }
     }
     .timeline-card {
       position: absolute;
       z-index: 4;
-      left: 12px;
-      right: 12px;
-      bottom: 8px;
-      height: 186px;
+      left: 148px;
+      right: 0;
+      top: 116px;
+      bottom: auto;
+      height: 444px;
       background: rgba(255,255,255,.94);
       border: 2px solid var(--line);
-      padding: 10px 12px;
+      padding: 9px;
       box-shadow: 7px 7px 0 var(--line);
-      overflow: auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: rotate(.4deg);
+    }
+    .archive-media {
+      flex: 0 0 auto;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 9px;
+    }
+    .film-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-family: var(--sans);
+      font-size: 8px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .film-frame {
+      position: relative;
+      width: 126px;
+      height: 168px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background:
+        radial-gradient(circle at 72% 30%, rgba(255,255,255,.76) 0 9%, transparent 10%),
+        radial-gradient(circle at 30% 68%, rgba(0,0,0,.82) 0 13%, transparent 14%),
+        repeating-linear-gradient(135deg, #e6e4dc 0 16px, #8f8e88 16px 28px, #171717 28px 32px, #d7d5cd 32px 48px);
+      filter: grayscale(1);
+      display: grid;
+      place-items: center;
+    }
+    .film-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      text-align: center;
+    }
+    .film-reel {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+    .film-reel::-webkit-scrollbar {
+      display: none;
+    }
+    .film-reel .film-link {
+      flex: 0 0 100%;
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+    .film-frame.has-cover {
+      display: inline-block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      background: #161616;
+      line-height: 0;
+    }
+    .film-frame.has-cover img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 168px;
+    }
+    .film-link .film-frame {
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .film-link:hover .film-frame,
+    .film-link:focus-visible .film-frame {
+      transform: translateY(-2px) rotate(-.5deg);
+      box-shadow: 4px 4px 0 var(--line);
+    }
+    .film-link:focus-visible {
+      outline: 1px dashed var(--line);
+      outline-offset: 4px;
+    }
+    .film-frame::before,
+    .film-frame::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 8px, transparent 8px 14px);
+      opacity: .84;
+    }
+    .film-frame::before { top: 0; }
+    .film-frame::after { bottom: 0; }
+    .film-play {
+      position: relative;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      border: 2px solid var(--paper);
+      border-radius: 50%;
+      background: rgba(0,0,0,.84);
+      color: var(--paper);
+      display: grid;
+      place-items: center;
+      padding-left: 3px;
+      font-family: var(--sans);
+      font-size: 17px;
+      box-shadow: 4px 4px 0 rgba(255,255,255,.68);
+    }
+    .film-placeholder {
+      position: absolute;
+      left: 8px;
+      bottom: 12px;
+      margin: 0;
+      padding: 3px 5px;
+      background: rgba(251,251,248,.9);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 8px;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .film-frame.has-cover .film-play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .film-video-title {
+      display: block;
+      margin-top: 7px;
+      min-height: 27px;
+      text-align: left;
+      font-family: var(--serif);
+      font-size: 10px;
+      line-height: 1.35;
+      letter-spacing: .01em;
+      font-weight: 900;
+    }
+    .film-video-title::after {
+      content: " ↗";
+      font-family: var(--sans);
+    }
+    .film-reel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 5px;
+      font-family: var(--sans);
+      font-size: 8px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .film-reel-buttons {
+      display: flex;
+      gap: 4px;
+    }
+    .film-reel-button {
+      width: 27px;
+      height: 20px;
+      padding: 0;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--line);
+    }
+    .film-reel-button:hover,
+    .film-reel-button:focus-visible {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .archive-media.has-articles .film-frame.has-cover img {
+      max-height: 118px;
+    }
+    .archive-media.has-articles .film-video-title {
+      min-height: 0;
+      margin-top: 5px;
+      font-size: 9px;
+      line-height: 1.25;
+    }
+    .archive-media.has-podcast {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 3px;
       -webkit-overflow-scrolling: touch;
+    }
+    .archive-media.has-podcast + .archive-copy {
+      flex: 0 0 112px;
+    }
+    .article-shelf {
+      margin-top: 7px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--line);
+    }
+    .article-shelf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 3px;
+      font-family: var(--sans);
+      font-size: 7.5px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .article-links {
+      display: grid;
+    }
+    .article-link {
+      display: grid;
+      grid-template-columns: 18px 1fr 9px;
+      align-items: start;
+      gap: 3px;
+      padding: 3px 0;
+      border-top: 1px solid rgba(20,20,20,.34);
+      color: inherit;
+      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 8.5px;
+      line-height: 1.2;
+      letter-spacing: .01em;
+      font-weight: 900;
+    }
+    .article-link:first-child {
+      border-top-color: var(--line);
+    }
+    .article-link:hover,
+    .article-link:focus-visible {
+      background: rgba(20,20,20,.08);
+    }
+    .article-link-index,
+    .article-link-arrow {
+      font-family: var(--sans);
+      font-size: 7px;
+      line-height: 1.35;
+      letter-spacing: .04em;
+    }
+    .article-link-arrow {
+      text-align: right;
+    }
+    .podcast-shelf {
+      margin-top: 7px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--line);
+    }
+    .podcast-shelf-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-family: var(--sans);
+      font-size: 7.5px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+    .podcast-card {
+      display: block;
+      border: 1px solid var(--line);
+      color: inherit;
+      text-decoration: none;
+      background: #f8f5ec;
+    }
+    .podcast-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .podcast-card small {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 4px 6px;
+      border-top: 1px solid rgba(20,20,20,.34);
+      font-size: 7px;
+      line-height: 1.25;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+    .podcast-card:hover,
+    .podcast-card:focus-visible {
+      background: #e8e5dc;
+    }
+    .archive-copy {
+      min-height: 0;
+      overflow: auto;
+      padding: 11px 7px 5px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .archive-copy.text-only {
+      padding: 27px 14px 18px;
+    }
+    .archive-copy.text-only .card-kicker {
+      margin-bottom: 10px;
+    }
+    .archive-copy.text-only h3 {
+      margin-bottom: 16px;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .archive-copy.text-only p {
+      font-size: 13px;
+      line-height: 1.85;
+      letter-spacing: .045em;
+      font-weight: 700;
     }
     .timeline-card .card-kicker {
       display: block;
       font-family: "Arial Narrow", Impact, var(--sans);
-      font-size: 26px;
+      font-size: 20px;
       line-height: .9;
       letter-spacing: -.05em;
       margin-bottom: 6px;
@@ -889,14 +1924,16 @@
     .timeline-card h3 {
       margin: 0 0 6px;
       font-family: var(--serif);
-      font-size: 25px;
+      font-size: 24px;
       line-height: .95;
       letter-spacing: -.06em;
+      margin-bottom: 8px;
     }
     .timeline-card p {
       margin: 0;
-      font-size: 10.5px;
-      line-height: 1.45;
+      font-size: 11.5px;
+      line-height: 1.6;
+      letter-spacing: .02em;
       font-weight: 700;
     }
     .service-stack {
@@ -964,74 +2001,430 @@
       border-right: 1px solid rgba(255,255,255,.42);
     }
     .flow-strip span:last-child { border-right: 0; }
-    .price-board {
-      margin-top: 26px;
+    #services {
+      padding-bottom: 108px;
+    }
+    .why-board {
+      position: relative;
+      z-index: 2;
       border-top: 1px solid var(--line);
+      padding-top: 18px;
     }
-    .price-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: baseline;
-      border-bottom: 1px solid var(--line);
-      padding: 18px 0;
-    }
-    .price-row b {
+    .why-intro {
+      max-width: none;
+      margin: 0;
       font-family: var(--serif);
-      font-size: 28px;
-      line-height: 1.15;
-      letter-spacing: -.06em;
+      font-size: clamp(10.5px, 3.2vw, 13px);
+      line-height: 1.35;
+      letter-spacing: -.04em;
+      font-weight: 900;
     }
-    .price-row strong {
-      font-size: 28px;
-      line-height: 1;
-    }
-    .fit-grid {
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 72px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.32fr) minmax(0, .88fr);
-      gap: 12px;
-    }
-    .fit-box {
-      min-height: 190px;
-      border: 2px solid var(--line);
-      padding: 10px 9px;
-      background: rgba(255,255,255,.62);
-    }
-    .fit-box b {
+    .why-intro span {
       display: block;
-      font-family: var(--serif);
-      font-size: 26px;
-      line-height: 1.08;
-      letter-spacing: -.06em;
+      white-space: nowrap;
+    }
+    .why-module {
+      margin-top: 32px;
+    }
+    .why-module + .why-module {
+      border-top: 2px solid var(--line);
+      padding-top: 20px;
+    }
+    .why-module-head {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 10px;
       margin-bottom: 14px;
     }
-    .fit-box ul {
+    .why-module-index {
+      border: 1px solid var(--line);
+      padding: 5px 7px;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 900;
+    }
+    .why-module-head h3 {
       margin: 0;
+      font-family: var(--serif);
+      font-size: 25px;
+      line-height: 1.04;
+      letter-spacing: -.055em;
+    }
+    .why-module-head p {
+      grid-column: 2;
+      margin: -3px 0 0;
+      color: #66655f;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+    .why-module-head .click-hint {
+      grid-column: 2;
+      margin-top: 1px;
+    }
+    .audition-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px 10px;
+      padding: 3px 2px 7px;
+    }
+    .audition-card {
+      position: relative;
+      display: block;
+      min-width: 0;
+      border: 2px solid var(--line);
+      background: #fff;
+      color: inherit;
+      text-decoration: none;
+      box-shadow: 5px 5px 0 var(--line);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .audition-card:nth-child(1) { transform: rotate(-.7deg); }
+    .audition-card:nth-child(2) { transform: rotate(.6deg); }
+    .audition-card:nth-child(3) { transform: rotate(.4deg); }
+    .audition-card:nth-child(4) { transform: rotate(-.5deg); }
+    .audition-card:hover,
+    .audition-card:focus-visible {
+      transform: translate(-2px, -2px) rotate(0);
+      box-shadow: 8px 8px 0 var(--line);
+    }
+    .audition-card:focus-visible {
+      outline: 3px solid #92918c;
+      outline-offset: 3px;
+    }
+    .audition-cover {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-bottom: 2px solid var(--line);
+      background: #161616;
+    }
+    .audition-cover::before,
+    .audition-cover::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      left: 0;
+      right: 0;
+      height: 9px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 8px, transparent 8px 14px);
+      opacity: .86;
+      pointer-events: none;
+    }
+    .audition-cover::before { top: 0; }
+    .audition-cover::after { bottom: 0; }
+    .audition-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.78) contrast(1.02);
+    }
+    .audition-play {
+      position: absolute;
+      z-index: 3;
+      right: 9px;
+      bottom: 14px;
+      width: 34px;
+      height: 34px;
+      border: 2px solid var(--paper);
+      border-radius: 50%;
+      background: rgba(0,0,0,.82);
+      color: var(--paper);
+      display: grid;
+      place-items: center;
+      padding-left: 2px;
+      font-size: 13px;
+      box-shadow: 3px 3px 0 rgba(255,255,255,.68);
+    }
+    .audition-play::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border: 1px solid rgba(251,251,248,.82);
+      border-radius: 50%;
+      animation: play-ring 2.2s ease-out infinite;
+    }
+    @keyframes play-ring {
+      0%, 58% { transform: scale(.75); opacity: 0; }
+      70% { opacity: .9; }
+      100% { transform: scale(1.32); opacity: 0; }
+    }
+    .audition-copy {
+      padding: 9px 8px 10px;
+    }
+    .audition-copy b {
+      display: block;
+      font-family: var(--serif);
+      font-size: 12px;
+      line-height: 1.28;
+      letter-spacing: -.02em;
+    }
+    .audition-copy small {
+      display: block;
+      margin-top: 6px;
+      color: #66655f;
+      font-size: 8.5px;
+      line-height: 1.4;
+    }
+    .result-film-wrap {
+      position: relative;
+    }
+    .result-film-hint {
+      margin: -6px 0 7px;
+      color: #777670;
+      font-size: 8px;
+      line-height: 1;
+      letter-spacing: .08em;
+      text-align: right;
+    }
+    .result-film {
+      position: relative;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      border: 2px solid var(--line);
+      background: var(--ink);
+      padding: 29px 10px;
+    }
+    .result-film::-webkit-scrollbar {
+      display: none;
+    }
+    .result-film::before,
+    .result-film::after {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: repeating-linear-gradient(90deg, var(--paper) 0 8px, transparent 8px 15px);
+      pointer-events: none;
+    }
+    .result-film::before { top: 7px; }
+    .result-film::after { bottom: 7px; }
+    .result-frame {
+      flex: 0 0 132px;
+      min-height: 105px;
+      scroll-snap-align: start;
+      border: 1px solid var(--paper);
+      background: #efede5;
+      color: var(--ink);
+      padding: 12px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .result-frame strong {
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 32px;
+      line-height: .9;
+      letter-spacing: -.04em;
+    }
+    .result-frame b {
+      display: block;
+      margin-top: 7px;
+      font-family: var(--serif);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+    .result-frame small {
+      display: block;
+      margin-top: 8px;
+      color: #66655f;
+      font-size: 8px;
+      line-height: 1.3;
+    }
+    .energy-statement {
+      margin: 13px 4px 0;
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.5;
+      letter-spacing: -.025em;
+      font-weight: 900;
+    }
+    .role-grid {
+      display: grid;
+      gap: 18px;
+    }
+    .role-card {
+      border: 2px solid var(--line);
+      background: rgba(255,255,255,.92);
+      box-shadow: 6px 6px 0 var(--line);
+      padding: 13px 12px 12px;
+    }
+    .role-card:nth-child(2) {
+      transform: translateX(5px);
+    }
+    .role-card:nth-child(3) {
+      transform: translateX(-3px);
+    }
+    .role-head {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      align-items: center;
+      gap: 9px;
+    }
+    .role-number {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .role-head h4 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1.05;
+      letter-spacing: -.045em;
+    }
+    .role-quote {
+      margin: 11px 0 0;
+      padding: 8px 9px;
+      border-left: 4px solid var(--line);
+      background: #e7e5dd;
+      color: #565550;
+      font-family: var(--serif);
+      font-size: 10px;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+    .role-judgment {
+      margin: 8px 0 0;
+      padding: 9px 10px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--serif);
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 900;
+    }
+    .role-evidence {
+      margin: 10px 0 0;
       padding: 0;
       list-style: none;
       display: grid;
       gap: 6px;
     }
-    .fit-box li {
+    .role-evidence li {
       position: relative;
       padding-left: 12px;
-      font-size: 12px;
-      line-height: 1.28;
-      font-weight: 800;
+      font-size: 10px;
+      line-height: 1.5;
+      font-weight: 700;
     }
-    .fit-box li::before {
-      content: "";
+    .role-evidence li::before {
+      content: "↳";
       position: absolute;
       left: 0;
-      top: .55em;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
+      top: 0;
+      font-weight: 900;
+    }
+    .role-links {
+      display: grid;
+      gap: 5px;
+      margin-top: 12px;
+      padding-top: 19px;
+      border-top: 1px solid rgba(5,5,5,.34);
+      position: relative;
+    }
+    .role-links::before {
+      content: "EVIDENCE LINKS / 点击查看原始证据";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      color: #66655f;
+      font-size: 7px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .07em;
+    }
+    .role-links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--line);
       background: var(--ink);
+      color: var(--paper);
+      padding: 8px 9px;
+      font-size: 9px;
+      line-height: 1.15;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 3px 3px 0 #8d8b83;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .role-links a:hover,
+    .role-links a:focus-visible {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #8d8b83;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .click-badge,
+      .case-card.is-click-visible,
+      .case-html-note span:last-child,
+      .role-links a span:last-child,
+      .audition-play::after {
+        animation: none;
+      }
+    }
+    .why-closing {
+      margin-top: 36px;
+      border: 1.5px solid #8d8b83;
+      background: #deddd6;
+      color: var(--ink);
+      padding: 14px 13px;
+      box-shadow: 5px 5px 0 #aaa89f;
+      transform: rotate(-.18deg);
+    }
+    .why-closing small {
+      display: block;
+      margin-bottom: 7px;
+      color: #66655f;
+      font-size: 7px;
+      line-height: 1;
+      letter-spacing: .12em;
+    }
+    .why-closing p {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.5;
+      letter-spacing: -.025em;
+      font-weight: 800;
+      font-weight: 900;
+    }
+    .why-mobility {
+      margin: 17px 3px 0;
+      padding: 8px 0;
+      border-top: 1px solid rgba(5,5,5,.5);
+      border-bottom: 1px solid rgba(5,5,5,.5);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #66655f;
+      font-size: 9.5px;
+      line-height: 1.5;
+      font-weight: 800;
+    }
+    .why-mobility span {
+      color: var(--ink);
+      font-family: "Arial Narrow", Impact, var(--sans);
+      font-size: 8px;
+      line-height: 1.4;
+      letter-spacing: .08em;
+      white-space: nowrap;
     }
     .orbital {
       position: absolute;
@@ -1210,11 +2603,11 @@
         <span class="marquee"><span>PINO IS A GOOD PERSON PINO IS A GOOD PERSON</span></span>
       </button>
       <a class="logo-pill" href="#top">宋子松 Pino</a>
-      <a class="latest" href="#who"><span class="marquee"><span>HE CAN ALSO BE A BAD PERSON HE CAN ALSO BE A BAD PERSON</span></span></a>
+      <a class="latest" href="#what"><span class="marquee"><span>HE CAN ALSO BE A BAD PERSON HE CAN ALSO BE A BAD PERSON</span></span></a>
     </header>
 
     <footer class="bottombar">
-      <a class="producer" href="https://zisongsong.github.io/yikesong-personal-intro/">一棵松个人介绍页 ↗</a>
+      <a class="producer" href="https://zisongsong.github.io/yikesong-personal-intro/">宋子松个人介绍页 ↗</a>
       <button class="menu-btn" type="button" id="menuBtn">MENU</button>
       <button class="contact-mini" type="button" id="contactBtn">CONTACT</button>
     </footer>
@@ -1265,9 +2658,9 @@
           <div class="cursor-hand"></div>
         </div>
         <div class="future-strip" aria-hidden="true">
-          <span class="future-text">未来每个人<br>都是一个品牌</span>
+          <span class="future-text">把判断做成作品<br>把反馈变成迭代</span>
           <span class="future-art"></span>
-          <span class="future-label">One Person Company</span>
+          <span class="future-label">PORTFOLIO</span>
         </div>
         <div class="collage-field" aria-hidden="true">
           <div class="track t1"></div>
@@ -1308,31 +2701,45 @@
         <div class="stamp s3">pinhão</div>
         <div class="stamp s4">кедровый<br>орех</div>
         <div class="stamp s5">صنوبر</div>
-        <div class="subcopy">这是宋子松的个人介绍页，<br>可以在这里了解我是谁、我能提供什么服务。</div>
+        <div class="subcopy">你好，我是宋子松（宋奕璇）。<br>在这里看我怎么判断、怎么创造、怎么复盘。</div>
       </section>
 
       <section class="section" id="who">
         <h2>WHO AM I</h2>
         <div class="jp">我是誰</div>
-        <div class="page-kicker">PAGE<br>02</div>
+        <div class="page-kicker">PAGE<br>04</div>
         <article class="life-map">
-          <h3 class="life-title">从没走过直线，只有一条歪歪扭扭的来时路</h3>
-          <p class="life-lead">不知道从什么时候开始，「做一个合格的大人」就成了我这辈子最不可能实现的事儿</p>
-          <svg class="route-svg" viewBox="0 0 430 410" aria-hidden="true">
-            <path d="M54 34 C210 8 298 76 202 132 C94 194 42 164 108 254 C180 352 338 248 354 374" />
+          <h3 class="life-title">
+            <span class="life-title-identity">一个梦想当侠客的<br>高能量 00 后：</span>
+            <span class="life-title-drive">靠好奇心续命，靠正义感闯荡江湖</span>
+          </h3>
+          <p class="life-lead"><span>从没走过直线</span><span>只有一条歪歪扭扭的来时路</span></p>
+          <svg class="route-svg" viewBox="0 0 150 430" aria-hidden="true">
+            <path d="M48 10 C126 20 132 62 70 80 C12 98 12 136 78 150 C140 164 136 206 62 220 C10 234 16 274 92 288 C144 298 136 338 66 350 C14 362 20 402 84 420" />
           </svg>
-          <button class="timeline-node n1 active" type="button" data-step="movie"><b>01</b><span>电影梦</span></button>
-          <button class="timeline-node n2" type="button" data-step="major"><b>02</b><span>工程管理</span></button>
-          <button class="timeline-node n3" type="button" data-step="dali"><b>03</b><span>大理</span></button>
-          <button class="timeline-node n4" type="button" data-step="sales"><b>04</b><span>销售</span></button>
-          <button class="timeline-node n5" type="button" data-step="content"><b>05</b><span>内容创作</span></button>
-          <button class="timeline-node n6" type="button" data-step="aiwork"><b>06</b><span>AI 内容工作</span></button>
-          <button class="timeline-node n7" type="button" data-step="yikesong"><b>07</b><span>一棵松</span></button>
-          <div class="timeline-hint">点击每个数字框<br>可以看到详细内容</div>
+          <button class="timeline-node n1 rich active" type="button" data-step="movie"><b>01</b><span>电影梦</span></button>
+          <button class="timeline-node n2 plain" type="button" data-step="major"><b>02</b><span>工程管理</span></button>
+          <button class="timeline-node n3 rich" type="button" data-step="dali"><b>03</b><span>大理</span></button>
+          <button class="timeline-node n4 rich" type="button" data-step="sales"><b>04</b><span>销售</span></button>
+          <button class="timeline-node n5 rich" type="button" data-step="content"><b>05</b><span>内容创作</span></button>
+          <button class="timeline-node n6 plain" type="button" data-step="aiwork"><b>06</b><span>MCN公司编导</span></button>
+          <div class="timeline-hint">点击左侧六个节点<br>翻阅我的来时路</div>
           <div class="timeline-card" id="timelineCard">
-            <span class="card-kicker">01</span>
-            <h3>电影梦</h3>
-            <p>高中时，开始想拍电影，那时候我以为人生会按一个目标展开，后来发现，目标也会背叛人。两次与北京电影学院失之交臂，不过也很早开始训练审美、叙事、镜头感和对人的观察。</p>
+            <div class="archive-media">
+              <div class="film-meta"><span>FILM ARCHIVE</span><span>01 / 06</span></div>
+              <a class="film-link" href="https://www.bilibili.com/video/BV1Z14y1s7BQ/?share_source=copy_web&amp;vd_source=310e3694ba0dd00e8fd8c8e02834c22e" target="_blank" rel="noopener noreferrer" aria-label="观看：大学生在酒吧打工是种什么样的体验？——《七至一时的宋子松》">
+                <span class="film-frame has-cover">
+                  <img src="./assets/film-dream-seven-to-one.webp" alt="《七至一时的宋子松》视频封面">
+                  <span class="film-play">▶</span>
+                </span>
+                <span class="film-video-title">大学生在酒吧打工是种什么样的体验？——《七至一时的宋子松》</span>
+              </a>
+            </div>
+            <div class="archive-copy">
+              <span class="card-kicker">01</span>
+              <h3>电影梦</h3>
+              <p>高中时，开始想拍电影，那时候我以为人生会按一个目标展开，后来考了两次北京电影学院都失败了，发现目标也会背叛人。不过也很早开始训练审美、叙事、镜头感和对人的观察，也在大学期间和毕业后拍了一些小短片。</p>
+            </div>
           </div>
         </article>
       </section>
@@ -1340,105 +2747,307 @@
       <section class="section" id="what">
         <h2>WHAT I DO</h2>
         <div class="jp">我做什麼</div>
-        <div class="page-kicker">PAGE<br>03</div>
-        <div class="pine-float" aria-hidden="true">
-          <span class="pine-ring pr1"></span>
-          <span class="pine-ring pr2"></span>
-          <span class="pine-nut pn1"></span>
-          <span class="pine-nut pn2"></span>
-          <span class="pine-nut pn3"></span>
-          <span class="pine-note pnote1">PINE NUT / PERSONAL ASSET</span>
+        <div class="page-kicker">PAGE<br>02</div>
+        <div class="evidence-board">
+          <section class="evidence-section" aria-labelledby="accountsHeading">
+            <header class="evidence-heading">
+              <span class="index">01 / 03</span>
+              <h3 id="accountsHeading">我在梦成 MCN<br>运营过的四个账号</h3>
+              <span class="click-hint">点击卡片，打开账号 ↗</span>
+            </header>
+
+            <div class="account-grid">
+              <a class="account-card" href="https://v.douyin.com/jQW-VQUzcHc/" target="_blank" rel="noopener noreferrer" aria-label="打开李守洲的抖音账号">
+                <span class="click-badge">点开账号 ↗</span>
+                <div class="account-shot"><img src="./assets/account-li-shouzhou.webp" alt="李守洲抖音账号截图"></div>
+                <div class="account-meta">
+                  <span class="account-index">ACCOUNT 01</span>
+                  <strong>李守洲</strong>
+                  <small>选题 / 公众号写作 / 逐字稿</small>
+                  <span class="account-link-note">打开抖音账号 ↗</span>
+                </div>
+              </a>
+
+              <a class="account-card" href="https://v.douyin.com/jenV2mZgJnM/" target="_blank" rel="noopener noreferrer" aria-label="打开栗子上线了的抖音账号">
+                <span class="click-badge">点开账号 ↗</span>
+                <div class="account-shot"><img src="./assets/account-lizi-online.webp" alt="栗子上线了抖音账号截图"></div>
+                <div class="account-meta">
+                  <span class="account-index">ACCOUNT 02</span>
+                  <strong>栗子上线了</strong>
+                  <small>选题 / 内容配比 / 评论区维护 / 账号运营与发布 / 逐字稿</small>
+                  <span class="account-link-note">打开抖音账号 ↗</span>
+                </div>
+              </a>
+
+              <a class="account-card" href="https://v.douyin.com/xAd3symwCOA/" target="_blank" rel="noopener noreferrer" aria-label="打开hermon认知涌现的抖音账号">
+                <span class="click-badge">点开账号 ↗</span>
+                <div class="account-shot"><img src="./assets/account-hermon.webp" alt="hermon认知涌现抖音账号截图"></div>
+                <div class="account-meta">
+                  <span class="account-index">ACCOUNT 03</span>
+                  <strong>hermon认知涌现</strong>
+                  <small>从0起号 / 内容配比 / 选题 / 逐字稿 / IP本人协同</small>
+                  <span class="account-link-note">打开抖音账号 ↗</span>
+                </div>
+              </a>
+
+              <a class="account-card" href="https://v.douyin.com/e8MMb0dT7P4/" target="_blank" rel="noopener noreferrer" aria-label="打开浩威loveology的抖音账号">
+                <span class="click-badge">点开账号 ↗</span>
+                <div class="account-shot"><img src="./assets/account-loveology.webp" alt="浩威loveology抖音账号截图"></div>
+                <div class="account-meta">
+                  <span class="account-index">ACCOUNT 04</span>
+                  <strong>浩威 loveology</strong>
+                  <small>选题 / 逐字稿</small>
+                  <span class="account-link-note">打开抖音账号 ↗</span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="evidence-section" aria-labelledby="casesHeading">
+            <header class="evidence-heading">
+              <span class="index">02 / 03</span>
+              <h3 id="casesHeading">两个重点账号的<br>完整操盘复盘</h3>
+              <span class="click-hint">点开整张卡片，查看完整复盘 ↗</span>
+            </header>
+
+            <div class="case-list">
+              <a class="case-card click-attention" href="https://zisongsong.github.io/lizi-account-evidence/" target="_blank" rel="noopener noreferrer" aria-label="打开栗子上线了账号完整复盘">
+                <div class="case-cover has-image">
+                  <span class="click-badge heavy">重磅复盘 · 点开看完整证据 ↗</span>
+                  <img src="./assets/case-lizi-account-review.webp" alt="栗子上线了账号工作痕迹、创作链与复盘链封面">
+                </div>
+                <div class="case-copy">
+                  <span class="case-kicker">KEY ACCOUNT / 栗子上线了</span>
+                  <h4>从人群校准到成交内容：栗子上线了完整复盘</h4>
+                  <div class="case-summary">
+                    <div class="case-summary-row"><b>问题</b><span>初始瞄准美业、K12老板，但线下到场人群与假设不符；高赞高收藏能证明专业，却难稳定制造咨询。</span></div>
+                    <div class="case-summary-row"><b>动作</b><span>主导内容配比、选题、51条逐字稿、评论维护与数据复盘；依据线下人群、评论和数据校准定位，并把“为什么现在要咨询”接入内容收尾。</span></div>
+                    <div class="case-summary-row"><b>结果</b><span>2026.03.26—05.25公开样本累计2.5万+赞、1.4万+藏，5条点赞过千、10条点赞过300；沉淀三层复盘与AI对标蒸馏工作流。</span></div>
+                  </div>
+                  <span class="case-html-note"><span>打开完整复盘 HTML</span><span>↗</span></span>
+                </div>
+              </a>
+
+              <a class="case-card click-attention" href="https://zisongsong.github.io/lishouzhou-account-evidence/" target="_blank" rel="noopener noreferrer" aria-label="打开李守洲账号完整复盘">
+                <div class="case-cover has-image">
+                  <span class="click-badge heavy">重磅复盘 · 点开看完整证据 ↗</span>
+                  <img src="./assets/case-lishouzhou-account-review.webp" alt="李守洲账号工作痕迹、创作链与复盘链封面">
+                </div>
+                <div class="case-copy">
+                  <span class="case-kicker">KEY ACCOUNT / 李守洲</span>
+                  <h4>从抽象概念到可信表达：李守洲复盘</h4>
+                  <div class="case-summary">
+                    <div class="case-summary-row"><b>问题</b><span>对“悬浮人群”的理解一度停在“有认知、有审美但商业做不起来”的标签层；“审美社会化”也没有真正落到受众处境和行动。</span></div>
+                    <div class="case-summary-row"><b>动作</b><span>主导约10篇公众号文章的选题、大纲、成稿与改稿；依据反馈校准选题中心，建立“框定人群—解释困境—给出路径—产品承接”的四层内容路径。</span></div>
+                    <div class="case-summary-row"><b>结果</b><span>完成约10篇全链路长文；闭环一篇3500字、五大段Hero案例；沉淀“选题—表达—语感”三层复盘与公众号写稿工作流。未发布内容不虚构数据。</span></div>
+                  </div>
+                  <span class="case-html-note"><span>打开完整复盘 HTML</span><span>↗</span></span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="evidence-section" id="interviewCase" aria-labelledby="interviewHeading">
+            <header class="evidence-heading">
+              <span class="index">03 / 03</span>
+              <h3 id="interviewHeading">百人保险访谈：<br>把销售变成深度连接</h3>
+              <p>我给自己定下 100 场一对一访谈，从保险切入，去听一个人如何理解风险、家庭、疾病、死亡、职业和自由。</p>
+            </header>
+
+            <article class="interview-case">
+              <div class="interview-case-top">
+                <div class="interview-proof">
+                  <span class="interview-proof-kicker">PEOPLE ARCHIVE<br>FIELD NOTES</span>
+                  <div class="interview-count"><strong>15</strong><span>/100</span></div>
+                  <p class="interview-progress">计划已推进并逐场公开记录</p>
+                  <div class="interview-tags" aria-label="访谈成果">
+                    <span>15 场一对一深聊</span>
+                    <span>15 份朋友圈记录</span>
+                    <span>从真实需求聊到人生</span>
+                  </div>
+                </div>
+                <button class="interview-stack" type="button" data-interview-open="2" aria-label="打开百人保险访谈原始记录，从第4场开始翻阅">
+                  <img src="./assets/interview-04.webp" alt="" loading="lazy">
+                  <img src="./assets/interview-10.webp" alt="" loading="lazy">
+                  <img src="./assets/interview-15.webp" alt="" loading="lazy">
+                  <span class="click-badge heavy interview-click-badge">原始记录 · 点开翻阅 ↗</span>
+                  <span class="interview-stack-cta"><span>翻阅 13 份原始记录</span><span>↗</span></span>
+                </button>
+              </div>
+              <div class="interview-case-copy">
+                <p>我不只想知道对方缺什么保障，更想知道一个人为什么犹豫、恐惧，又因为什么愿意信任。受访者谈起创业、女性资产、养老、疾病、死亡与人生选择；有人在我面前落泪，也有人第一次愿意重新理解保险。</p>
+                <blockquote class="interview-quote">
+                  <p>“以保险为工具，连接不同圈层的人，缩小信息差。”</p>
+                  <cite>— 受访者反馈 / 第 15 场</cite>
+                </blockquote>
+              </div>
+            </article>
+          </section>
         </div>
-        <article class="highlight-card">
-          <div class="num">#02</div>
-          <h3>把经历、内容<br>做成可交付产品</h3>
-          <div class="dense-copy">
-            <p>我能变现的不是某一个工具，而是把经历、表达、审美、AI 协作和商业判断重新组织成一个产品入口。</p>
-            <p>我会先把一个人讲清楚：你是谁、做过什么、有什么证据、能提供什么、别人为什么应该信你。</p>
-            <p>再把这些内容变成可以传播、可以成交、可以继续升级的网页、内容资产库和 AI 内容生产系统。</p>
-          </div>
-          <div class="chapter-card">
-            <b>我的能力不是单点技能，是把混乱材料整理成商业表达。</b>
-            <small>个人经历结构化 / 内容表达 / 视觉打板 / AI 工作流 / 一人公司产品化。</small>
-          </div>
-        </article>
       </section>
 
       <section class="section" id="services">
-        <h2>SERVICE</h2>
-        <div class="jp">產品服務內容</div>
-        <div class="page-kicker">PAGE<br>04</div>
-        <div class="pine-float" aria-hidden="true">
-          <span class="pine-ring pr1"></span>
-          <span class="pine-ring pr2"></span>
-          <span class="pine-nut pn1"></span>
-          <span class="pine-nut pn2"></span>
-          <span class="pine-nut pn4"></span>
-          <span class="pine-note pnote2">SMALL SEED / REAL BUSINESS</span>
-        </div>
-        <div class="service-stack">
-          <article class="service-item feature">
-            <div class="mark">01</div>
-            <div><b>初级产品：品牌定位 + 个人介绍页</b><small>先用一次轻量访谈，把你是谁、卖什么、给谁看、用户看完要做什么整理清楚，再做成一个可扫码、可转发、可商用的手机版网页入口。</small>
-              <div class="flow-strip"><span>访谈</span><span>整理</span><span>设计</span><span>交付</span></div>
+        <h2>HOW I WORK</h2>
+        <div class="jp">我如何工作</div>
+        <div class="page-kicker">PAGE<br>03</div>
+        <div class="why-board">
+          <p class="why-intro"><span>我把人群判断、选题、脚本、拍摄呈现、发布反馈和复盘，</span><span>连成一条可迭代的内容链路。</span></p>
+
+          <section class="why-module" aria-labelledby="auditionHeading">
+            <header class="why-module-head">
+              <span class="why-module-index">01</span>
+              <h3 id="auditionHeading">代表作品档案</h3>
+              <p>不用先听我评价自己，点击下面四张封面，直接看我如何表达观点、进入生活和把念头做成作品。</p>
+              <span class="click-hint">点击封面，直接看作品 ▶</span>
+            </header>
+            <div class="audition-grid">
+              <a class="audition-card" href="http://xhslink.cn/o/AFcPFLIdrKA" target="_blank" rel="noopener noreferrer">
+                <span class="click-badge">点开观看 ▶</span>
+                <div class="audition-cover">
+                  <img src="./assets/content-what-is-love.webp" alt="《如果你也分不清什么是爱，请点开这个视频》封面">
+                  <span class="audition-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="audition-copy">
+                  <b>如果你也分不清什么是爱，请点开这个视频</b>
+                  <small>个人判断、镜头表现与情绪穿透力，单条全平台 30 万+播放。</small>
+                </div>
+              </a>
+              <a class="audition-card" href="https://weixin.qq.com/sph/ALijE9b56e" target="_blank" rel="noopener noreferrer">
+                <span class="click-badge">点开观看 ▶</span>
+                <div class="audition-cover">
+                  <img src="./assets/dali-life-guide.webp" alt="《大理生活指难》视频封面">
+                  <span class="audition-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="audition-copy">
+                  <b>普通女孩不上班的两年是怎么活下来的？《大理生活指难》</b>
+                  <small>把两年的非标准生活、探索欲和生命密度做成一支完整作品。</small>
+                </div>
+              </a>
+              <a class="audition-card" href="https://weixin.qq.com/sph/ASF820PmGg" target="_blank" rel="noopener noreferrer">
+                <span class="click-badge">点开观看 ▶</span>
+                <div class="audition-cover">
+                  <img src="./assets/sales-wong-kar-wai-insurance.webp" alt="《如果王家卫去卖保险 / 第二期》视频封面">
+                  <span class="audition-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="audition-copy">
+                  <b>《如果王家卫去卖保险 / 第二期》</b>
+                  <small>把最现实的销售，拍成一支有作者感、审美和表演性的短片。</small>
+                </div>
+              </a>
+              <a class="audition-card" href="https://weixin.qq.com/sph/A0d4RWKjqe" target="_blank" rel="noopener noreferrer">
+                <span class="click-badge">点开观看 ▶</span>
+                <div class="audition-cover">
+                  <img src="./assets/content-young-person-night.webp" alt="《我做了一个给老年人写回忆录的工作室》视频封面">
+                  <span class="audition-play" aria-hidden="true">▶</span>
+                </div>
+                <div class="audition-copy">
+                  <b>看来，你我都是有故事的人。《我做了一个给老年人写回忆录的工作室》</b>
+                  <small>对人的兴趣，如何从一个念头变成真实项目，再变成一支记录。</small>
+                </div>
+              </a>
             </div>
-          </article>
-          <article class="service-item">
-            <div class="mark">02</div>
-            <div><b>中级产品：个人 IP 资产整理 + 内容资产库</b><small>不只是做一页介绍，而是把经历、观点、案例、选题、作品证据整理成可持续复用的个人 IP 素材库。</small></div>
-          </article>
-          <article class="service-item">
-            <div class="mark">03</div>
-            <div><b>高级产品：AI 内容生产系统</b><small>把选题、素材、文案、发布、复盘这些动作拆成流程，让 AI 不只是生成内容，而是参与一套稳定的内容生产系统。</small></div>
-          </article>
-          <article class="service-item">
-            <div class="mark">04</div>
-            <div><b>一人公司产品化陪跑 / 咨询</b><small>从“我会很多东西”走到“我有清楚的产品、价格、交付边界和成交路径”，适合已经想把个人能力做成生意的人。</small></div>
-          </article>
+          </section>
+
+          <section class="why-module" aria-labelledby="energyHeading">
+            <header class="why-module-head">
+              <span class="why-module-index">02</span>
+              <h3 id="energyHeading">作品与结果记录</h3>
+              <p>这一卷胶片记录已经落地的作品、内容系统和业务结果。</p>
+            </header>
+            <div class="result-film-wrap">
+              <p class="result-film-hint">横向滑动胶片 →</p>
+              <div class="result-film" aria-label="作品与业务结果胶片">
+                <article class="result-frame"><strong>50+</strong><b>内容与业务 Skill</b><small>把可复用判断做成能直接调用的工作流</small></article>
+                <article class="result-frame"><strong>15</strong><b>百人访谈原始记录</b><small>从真实需求、犹豫和信任里理解具体的人</small></article>
+                <article class="result-frame"><strong>4+</strong><b>可直接访问的 HTML 作品</b><small>个人介绍、方法图谱与账号复盘</small></article>
+                <article class="result-frame"><strong>4</strong><b>商业 IP 真实业务</b><small>AI 工作流进入选题、写稿、运营与复盘</small></article>
+                <article class="result-frame"><strong>150+</strong><b>公众号文章</b><small>或个人表达，或商业内容，从未真正停更</small></article>
+                <article class="result-frame"><strong>51</strong><b>商业 IP 逐字稿</b><small>在真实反馈、修改与发布里训练写作判断</small></article>
+                <article class="result-frame"><strong>30万+</strong><b>单条全平台播放</b><small>个人体悟也能被结构成别人愿意看完的内容</small></article>
+                <article class="result-frame"><strong>2个月</strong><b>自学 AI 编程</b><small>随后进入 MCN 的 AI + IP 内容岗位</small></article>
+              </div>
+            </div>
+            <p class="energy-statement">我把好奇心和行动力转换成了作品、账号、业务动作和可复盘的结果。</p>
+          </section>
+
+          <section class="why-module" aria-labelledby="roleHeading">
+            <header class="why-module-head">
+              <span class="why-module-index">03</span>
+              <h3 id="roleHeading">内容工作里的三个位置，<br>我都有来路</h3>
+              <p>从判断到表达再到反馈，以下三张证据卡说明我具体做过什么。</p>
+              <span class="click-hint">点击卡片底部，查看原始证据 ↗</span>
+            </header>
+            <div class="role-grid">
+              <article class="role-card">
+                <header class="role-head">
+                  <span class="role-number">01</span>
+                  <h4>内容策划<br>判断人群、定位和选题</h4>
+                </header>
+                <p class="role-quote">“定位不是一句标签，是用户此刻正在经历什么。”</p>
+                <p class="role-judgment">进入写稿前，我先判断内容对谁说、要拆掉什么卡点、最后承接到哪里。</p>
+                <ul class="role-evidence">
+                  <li>进入四个商业 IP 的真实业务，参与定位、内容配比、选题、逐字稿和复盘。</li>
+                  <li>根据线下人群、评论和数据，参与校准栗子上线了的内容方向。</li>
+                  <li>为李守洲账号处理高认知人群、抽象概念与商业行动之间的翻译。</li>
+                </ul>
+                <div class="role-links">
+                  <a href="#what"><span>查看证据：四个账号与复盘</span><span>↑</span></a>
+                  <a href="https://zisongsong.github.io/lizi-account-evidence/" target="_blank" rel="noopener noreferrer"><span>查看证据：栗子完整复盘</span><span>↗</span></a>
+                </div>
+              </article>
+
+              <article class="role-card">
+                <header class="role-head">
+                  <span class="role-number">02</span>
+                  <h4>内容编导<br>把判断变成可看的表达</h4>
+                </header>
+                <p class="role-quote">“好文案不只把一句话写顺，还要让观点、镜头和人设站在一起。”</p>
+                <p class="role-judgment">我同时理解脚本、长文、拍摄呈现和剪辑沟通，不把文案当成孤立交付。</p>
+                <ul class="role-evidence">
+                  <li>长期原创视频与文章，单条个人内容全平台 20 万+播放、2 万+点赞。</li>
+                  <li>把销售、非标准生活和回忆录工作室做成有作者感的镜头作品。</li>
+                  <li>从零参与 hermon 账号内容，并用 AI 编程完成复盘网页和工作流。</li>
+                </ul>
+                <div class="role-links">
+                  <a href="https://weixin.qq.com/sph/A0d4RWKjqe" target="_blank" rel="noopener noreferrer"><span>查看证据：回忆录工作室</span><span>↗</span></a>
+                  <a href="https://zisongsong.github.io/lishouzhou-account-evidence/" target="_blank" rel="noopener noreferrer"><span>查看证据：李守洲复盘网页</span><span>↗</span></a>
+                </div>
+              </article>
+
+              <article class="role-card">
+                <header class="role-head">
+                  <span class="role-number">03</span>
+                  <h4>内容运营<br>用反馈推动下一轮</h4>
+                </header>
+                <p class="role-quote">“高赞高藏，也可能没有稳定咨询。”</p>
+                <p class="role-judgment">发布不是结束。我会同时看数据、评论、进线与私域反馈，判断下一轮要改什么。</p>
+                <ul class="role-evidence">
+                  <li>发起「百人保险访谈」计划，围绕风险、家庭、疾病、职业与人生选择进行一对一深聊，并逐场公开记录。</li>
+                  <li>做过保险与食品原料销售，直面真实客户、拒绝、信任和成交。</li>
+                  <li>把评论、用户问题和销售反馈带回选题、内容收尾与承接动作。</li>
+                </ul>
+                <div class="role-links">
+                  <a href="#interviewCase"><span>查看证据：百人访谈档案</span><span>↑</span></a>
+                  <a href="https://weixin.qq.com/sph/ASF820PmGg" target="_blank" rel="noopener noreferrer"><span>查看证据：销售时期作品</span><span>↗</span></a>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="why-closing" aria-label="结语">
+            <small>LAST FRAME / TO BE CONTINUED</small>
+            <p>目前在杭州，求职方向：IP 内容操盘、内容编导、内容运营。期待进入真实业务，用作品与结果继续验证判断。</p>
+          </section>
         </div>
       </section>
 
-      <section class="section" id="price">
-        <h2>PRICE</h2>
-        <div class="jp">價格與適配</div>
-        <div class="page-kicker">PAGE<br>05</div>
-        <div class="price-board">
-          <div class="price-row"><b>正式单页<br>手机版网页</b><strong>¥999</strong></div>
-          <div class="price-row"><b>前 3 个<br>体验价</b><strong>¥399</strong></div>
-          <div class="price-row"><b>交付内容</b><strong>网页+二维码</strong></div>
-        </div>
-        <div class="fit-grid">
-          <div class="fit-box">
-            <b>适合谁</b>
-            <ul>
-              <li>个人 IP / 自媒体人</li>
-              <li>咨询师 / 律师 / 保险经纪人</li>
-              <li>线下社群主理人</li>
-              <li>小工作室</li>
-              <li>餐饮店 / 茶室 / 咖啡店 / 独立书店</li>
-              <li>有明确产品但缺介绍页的人</li>
-            </ul>
-          </div>
-          <div class="fit-box">
-            <b>不适合谁</b>
-            <ul>
-              <li>还不知道自己卖什么</li>
-              <li>只想要便宜模板</li>
-              <li>无法提供基本文字素材</li>
-              <li>需要后台系统</li>
-              <li>需要支付或预约功能</li>
-            </ul>
-          </div>
-        </div>
-      </section>
     </main>
 
     <nav class="menu-panel" id="menuPanel" aria-label="menu">
       <a href="#top">(1) OPENING</a>
-      <a href="#who">(2) WHO AM I</a>
-      <a href="#what">(3) WHAT I DO</a>
-      <a href="#services">(4) SERVICE</a>
-      <a href="#price">(5) PRICE</a>
+      <a href="#what">(2) WHAT I DO</a>
+      <a href="#services">(3) HOW I WORK</a>
+      <a href="#who">(4) WHO AM I</a>
     </nav>
 
     <aside class="qr-panel" id="qrPanel" aria-label="contact qr">
@@ -1449,6 +3058,27 @@
       <img class="qr-art" src="assets/song-zisong-wechat-qr.jpg" alt="宋子松微信二维码">
       <p>微信号：outlierszs</p>
     </aside>
+
+    <div class="interview-modal" id="interviewModal" aria-hidden="true">
+      <div class="interview-modal-backdrop" data-interview-close></div>
+      <section class="interview-dialog" role="dialog" aria-modal="true" aria-labelledby="interviewDialogTitle">
+        <header class="interview-dialog-head">
+          <span id="interviewDialogTitle">百人保险访谈 / 原始朋友圈记录</span>
+          <button class="interview-dialog-close" type="button" data-interview-close aria-label="关闭访谈档案">×</button>
+        </header>
+        <div class="interview-gallery" id="interviewGallery">
+          <button class="interview-gallery-nav previous" type="button" data-interview-direction="previous" aria-label="上一份访谈记录">←</button>
+          <figure>
+            <img id="interviewGalleryImage" src="./assets/interview-04.webp" alt="百人保险访谈第4场朋友圈记录">
+            <figcaption>
+              <span id="interviewGalleryCount">03 / 13</span>
+              <span id="interviewGalleryLabel">第 4 场 / 100</span>
+            </figcaption>
+          </figure>
+          <button class="interview-gallery-nav next" type="button" data-interview-direction="next" aria-label="下一份访谈记录">→</button>
+        </div>
+      </section>
+    </div>
   </div>
 
   <script>
@@ -1467,55 +3097,340 @@
       event.currentTarget.classList.toggle("is-on");
       event.currentTarget.style.filter = event.currentTarget.classList.contains("is-on") ? "invert(1)" : "";
     });
+
+    const interviewRecords = [
+      { src: "./assets/interview-01.webp", label: "第 2 场 / 100" },
+      { src: "./assets/interview-03.webp", label: "第 3 场 / 100" },
+      { src: "./assets/interview-04.webp", label: "第 4 场 / 100" },
+      { src: "./assets/interview-05.webp", label: "第 5 场 / 100" },
+      { src: "./assets/interview-06.webp", label: "第 6 场 / 100" },
+      { src: "./assets/interview-07.webp", label: "第 7 场 / 100" },
+      { src: "./assets/interview-08.webp", label: "第 8 场 / 100" },
+      { src: "./assets/interview-09.webp", label: "第 9 场 / 100" },
+      { src: "./assets/interview-10.webp", label: "第 10 场 / 100" },
+      { src: "./assets/interview-11.webp", label: "第 11 场 / 100" },
+      { src: "./assets/interview-12.webp", label: "第 12 场 / 100" },
+      { src: "./assets/interview-13.webp", label: "第 13 场 / 100" },
+      { src: "./assets/interview-15.webp", label: "第 15 场 / 100" }
+    ];
+    const interviewModal = document.querySelector("#interviewModal");
+    const interviewGallery = document.querySelector("#interviewGallery");
+    const interviewGalleryImage = document.querySelector("#interviewGalleryImage");
+    const interviewGalleryCount = document.querySelector("#interviewGalleryCount");
+    const interviewGalleryLabel = document.querySelector("#interviewGalleryLabel");
+    let interviewIndex = 2;
+    let interviewPreviousFocus = null;
+    let interviewPointerStart = null;
+    const showInterviewRecord = (index) => {
+      interviewIndex = (index + interviewRecords.length) % interviewRecords.length;
+      const record = interviewRecords[interviewIndex];
+      interviewGalleryImage.src = record.src;
+      interviewGalleryImage.alt = `百人保险访谈${record.label}朋友圈记录`;
+      interviewGalleryCount.textContent = `${String(interviewIndex + 1).padStart(2, "0")} / ${String(interviewRecords.length).padStart(2, "0")}`;
+      interviewGalleryLabel.textContent = record.label;
+    };
+    const openInterviewArchive = (index = 2) => {
+      interviewPreviousFocus = document.activeElement;
+      showInterviewRecord(index);
+      interviewModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("interview-open");
+      interviewModal.querySelector(".interview-dialog-close").focus();
+    };
+    const closeInterviewArchive = () => {
+      interviewModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("interview-open");
+      interviewPreviousFocus?.focus();
+    };
+    document.querySelectorAll("[data-interview-open]").forEach((button) => {
+      button.addEventListener("click", () => openInterviewArchive(Number(button.dataset.interviewOpen) || 0));
+    });
+    document.querySelectorAll("[data-interview-close]").forEach((button) => {
+      button.addEventListener("click", closeInterviewArchive);
+    });
+    document.querySelectorAll("[data-interview-direction]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showInterviewRecord(interviewIndex + (button.dataset.interviewDirection === "next" ? 1 : -1));
+      });
+    });
+    interviewGallery.addEventListener("pointerdown", (event) => {
+      interviewPointerStart = event.clientX;
+    });
+    interviewGallery.addEventListener("pointerup", (event) => {
+      if (interviewPointerStart === null) return;
+      const distance = event.clientX - interviewPointerStart;
+      if (Math.abs(distance) > 48) showInterviewRecord(interviewIndex + (distance < 0 ? 1 : -1));
+      interviewPointerStart = null;
+    });
+    document.addEventListener("keydown", (event) => {
+      if (interviewModal.getAttribute("aria-hidden") === "true") return;
+      if (event.key === "Escape") closeInterviewArchive();
+      if (event.key === "ArrowLeft") showInterviewRecord(interviewIndex - 1);
+      if (event.key === "ArrowRight") showInterviewRecord(interviewIndex + 1);
+    });
+
     const timelineData = {
       movie: {
         num: "01",
         title: "电影梦",
-        body: "高中时，开始想拍电影，那时候我以为人生会按一个目标展开，后来发现，目标也会背叛人。两次与北京电影学院失之交臂，不过也很早开始训练审美、叙事、镜头感和对人的观察。"
+        body: "高中时，开始想拍电影，那时候我以为人生会按一个目标展开，后来考了两次北京电影学院都失败了，发现目标也会背叛人。不过也很早开始训练审美、叙事、镜头感和对人的观察，也在大学期间和毕业后拍了一些小短片。",
+        videos: [
+          {
+            title: "大学生在酒吧打工是种什么样的体验？——《七至一时的宋子松》",
+            url: "https://www.bilibili.com/video/BV1Z14y1s7BQ/?share_source=copy_web&vd_source=310e3694ba0dd00e8fd8c8e02834c22e",
+            cover: "./assets/film-dream-seven-to-one.webp",
+            alt: "《七至一时的宋子松》视频封面"
+          },
+          {
+            title: "《给爷爷奶奶的一封信》",
+            url: "https://www.bilibili.com/video/BV1Cd4y1z7DS/?share_source=copy_web",
+            cover: "./assets/film-dream-letter-grandparents.webp",
+            alt: "《给爷爷奶奶的一封信》视频封面"
+          },
+          {
+            title: "她16岁辍学，一边打工一边写诗",
+            url: "https://www.bilibili.com/video/BV1mY4y1u7au/?share_source=copy_web",
+            cover: "./assets/film-dream-poet-at-sixteen.webp",
+            alt: "《她16岁辍学，一边打工一边写诗》视频封面"
+          }
+        ]
       },
       major: {
         num: "02",
         title: "工程管理",
-        body: "作为理科生还是喜欢物理和数学的，在济南大学我读了这个很现实的专业，它和电影很远，和我想象中的自己也很远，但它让我第一次意识到，人不能只活在脑子里的世界。"
+        body: "作为理科生还是喜欢物理和数学的，高考分数595分，2018年-2022年在济南大学我读了这个很现实的专业，管理信息科学与技术（工程管理方向）。它和电影很远，和我想象中的自己也很远，但它让我第一次意识到，人不能只活在脑子里的世界。大学期间，我还系统读过、背诵过西方哲学史、中国美学史、西方艺术史、文艺理论、电影史与电影理论，搭起一套从古典哲学延伸到结构主义、后现代主义的人文知识框架。这套人文底盘后来成了我理解人、判断内容和创造表达的坐标系。",
+        textOnly: true
       },
       dali: {
         num: "03",
         title: "大理",
-        body: "大学毕业我去了大理，那段时间没有标准答案，只有具体的生活、具体的际遇。我拍了好多短片，写了好多文章，去山里闭关两个月、去酒吧/酸奶店/茶室打工、开了摄影工作室、自编自导自演话剧，还把自己混成了数字游民，结识了或学院派或野生的导演、诗人、画家、摄影师、作曲家、小说家，还有身心灵教主、网红流浪汉、过气演员、神秘黑客，不同生命阶段、不同阶层的人。我的世界被打开了，我开始觉得，人不是标签，人是处境。也真正意识到，我当不了文艺青年，过不了「出世」的生活。人在没有拿起过什么之前，没资格说放下。"
+        body: "大学毕业我去了大理，那段时间没有标准答案，只有具体的生活、奇妙的际遇。我拍了好多短片、去山里闭关两个月、去酒吧/酸奶店/茶室打工、开了摄影工作室、自编自导自演话剧，还把自己混成了数字游民，结识了或学院派或野生的导演、诗人、画家、摄影师、作曲家、小说家，还有身心灵教主、网红流浪汉、过气演员、神秘黑客，不同生命阶段、不同阶层的人，我的世界被打开了。也真正意识到，我当不了文艺青年，过不了「出世」的生活。人在没有拿起过什么之前，没资格说放下。",
+        videos: [
+          {
+            title: "普通女孩不上班的两年是怎么活下来的？《大理生活指难》",
+            url: "https://weixin.qq.com/sph/ALijE9b56e",
+            cover: "./assets/dali-life-guide.webp",
+            alt: "《大理生活指难》视频封面"
+          }
+        ]
       },
       sales: {
         num: "04",
         title: "销售",
-        body: "从大理到成都，开始好好学习「入世」，做过保险销售，也做过食品原料销售。这两段经历让我直面真实客户、真实的拒绝和信任。我不再只是表达自己，开始更在意人为什么犹豫、为什么恐惧、为什么而买单。"
+        body: "从大理到成都，开始好好学习「入世」，做过保险销售，也做过食品原料销售。这两段经历让我直面真实客户、真实的拒绝和信任。我不再只是表达自己，开始更在意人为什么犹豫、为什么恐惧、为什么而买单。至今依然是一家保险公司的经纪人，写了100篇+保险公众号文章，也做了一个小红书保险账号：全息小松。还发起了「百人保险访谈」计划，把销售变成一场场理解真实的人、建立真实信任的深聊。",
+        videos: [
+          {
+            title: "《如果王家卫去卖保险 / 第二期》",
+            url: "https://weixin.qq.com/sph/ASF820PmGg",
+            cover: "./assets/sales-wong-kar-wai-insurance.webp",
+            alt: "《如果王家卫去卖保险 / 第二期》视频封面"
+          }
+        ],
+        articles: [
+          {
+            title: "月入十万不是梦？保险行业最擅长忽悠年轻人！",
+            url: "https://mp.weixin.qq.com/s/kt5LuJ7MI1HEvV7ogM714w"
+          },
+          {
+            title: "沉睡的保单，年轻保险人无路可走了吗？",
+            url: "https://mp.weixin.qq.com/s/3ksa1dGTRINxzhEKUar1OA"
+          },
+          {
+            title: "卖保险的，为什么一定要慢下来？",
+            url: "https://mp.weixin.qq.com/s/pYkMItATKBgzrWWG30xOHA"
+          },
+          {
+            title: "为什么我愿意花时间教新人，而且还要收费？",
+            url: "https://mp.weixin.qq.com/s/HugvudeJsT_lNIo_zA8OyQ"
+          }
+        ]
       },
       content: {
         num: "05",
         title: "内容创作",
-        body: "我一直在做内容，或视频或文章，从来没有真正停过，因为停不下来。公众号更了150多篇，也有过全平台 30 万播放、2 万点赞的单条视频，开始研究一条内容如何从情绪、观点，变成别人愿意看完的结构。不过依然没有探索出正确的商业导向。"
+        body: "我一直在做内容，视频、文章、播客，从来没有真正停过。公众号更了150多篇，也有过全平台单条30万+播放的小爆款视频，开始研究一条内容如何从情绪、观点，变成别人愿意看完的结构。",
+        videos: [
+          {
+            title: "如果你也分不清什么是爱，请点开这个视频",
+            url: "http://xhslink.cn/o/AFcPFLIdrKA",
+            cover: "./assets/content-what-is-love.webp",
+            alt: "《如果你也分不清什么是爱，请点开这个视频》封面"
+          },
+          {
+            title: "看来，你我都是有故事的人。《我做了一个给老年人写回忆录的工作室》",
+            url: "https://weixin.qq.com/sph/A0d4RWKjqe",
+            cover: "./assets/content-young-person-night.webp",
+            alt: "《我做了一个给老年人写回忆录的工作室》视频封面"
+          }
+        ],
+        articles: [
+          {
+            title: "请回答2025：欲望、肉身、关系与一个出走的人",
+            url: "https://mp.weixin.qq.com/s/8IbElld7sQy8u1PWnGwc6w"
+          },
+          {
+            title: "帮奶奶给骗子回了消息，我撞见一整条收割老人的产业链",
+            url: "https://mp.weixin.qq.com/s/g_GPCh0hpoiYAqbMg9CKCQ"
+          },
+          {
+            title: "年度最丑艺术展？盯着这些垃圾看久了，觉得自己也是个怪物",
+            url: "https://mp.weixin.qq.com/s/2pWIXgWVEFlPUywVyIfvqA"
+          },
+          {
+            title: "我从没想过有天你们都问我大理的人",
+            url: "https://mp.weixin.qq.com/s/LOYKL3NsieG-GANI-v_epQ"
+          }
+        ],
+        podcast: {
+          title: "迟弛 ChillChill",
+          cover: "./assets/podcast-chillchill.jpg",
+          alt: "迟弛 ChillChill 播客介绍及小宇宙订阅二维码"
+        }
       },
       aiwork: {
         num: "06",
-        title: "AI 内容工作",
-        body: "通过俩月自学AI编程，获得了一份MCN公司的工作，在内容团队里做AI+IP运营，每天泡在真实业务里训练AI 协作、内容判断和交付能力。我知道这是个能学到东西的平台，但还是会别扭，于是我的算命skill告诉我：「进系统学习，出系统立命」。不追求AI Native，只追求AI Creative，没有所谓的AI赋能，都是注定的而已。"
-      },
-      yikesong: {
-        num: "07",
-        title: "一棵松",
-        body: "我正在把这些经历里有价值的部分整合成自己的个人品牌，它不只是一个账号，而是我审美、判断、内容、AI 和商业能力产品化的入口，希望未来能创造真实的商业价值。失败无数次，归来仍是大傻子。时至今日，我终于明白，ai替代不了我的那部分，就是我的失败，因为我正在把失败、经验、判断和审美组织成可视化的产品。可能这就是所谓的韧性。"
+        title: "MCN公司编导",
+        body: "通过俩月自学AI编程，2026年3月，获得了一份MCN公司的工作，在内容团队里做AI+IP运营，每天泡在真实业务里训练AI 协作、内容判断和交付能力。运营过以下4个账号：李守洲、栗子上线了、hermon认知涌现、浩威loveology。前面的账号案例，详细展开了我在真实业务里具体做了什么、如何复盘。",
+        textOnly: true
       }
     };
     const timelineCard = document.querySelector("#timelineCard");
     const timelineNodes = document.querySelectorAll(".timeline-node");
+    function initFilmReel() {
+      const reel = timelineCard.querySelector(".film-reel");
+      if (!reel) return;
+      const cards = Array.from(reel.querySelectorAll(".film-link"));
+      const counter = timelineCard.querySelector(".film-reel-count");
+      const previous = timelineCard.querySelector("[data-reel-direction='previous']");
+      const next = timelineCard.querySelector("[data-reel-direction='next']");
+      let current = 0;
+      const updateCounter = () => {
+        if (counter) counter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(cards.length).padStart(2, "0")}`;
+      };
+      const goTo = (index) => {
+        current = (index + cards.length) % cards.length;
+        reel.scrollTo({ left: cards[current].offsetLeft - reel.offsetLeft, behavior: "smooth" });
+        updateCounter();
+      };
+      previous?.addEventListener("click", () => goTo(current - 1));
+      next?.addEventListener("click", () => goTo(current + 1));
+      reel.addEventListener("scroll", () => {
+        const reelLeft = reel.getBoundingClientRect().left;
+        current = cards.reduce((closest, card, index) => {
+          const currentDistance = Math.abs(cards[closest].getBoundingClientRect().left - reelLeft);
+          const nextDistance = Math.abs(card.getBoundingClientRect().left - reelLeft);
+          return nextDistance < currentDistance ? index : closest;
+        }, 0);
+        updateCounter();
+      }, { passive: true });
+      updateCounter();
+    }
     function showTimeline(step) {
       const item = timelineData[step];
       if (!item || !timelineCard) return;
-      timelineCard.innerHTML = `<span class="card-kicker">${item.num}</span><h3>${item.title}</h3><p>${item.body}</p>`;
-      timelineCard.scrollTop = 0;
-      timelineNodes.forEach((node) => node.classList.toggle("active", node.dataset.step === step));
+      const articles = item.articles?.length ? `
+          <div class="article-shelf">
+            <div class="article-shelf-head">
+              <span>公众号文章</span>
+              <span>${String(item.articles.length).padStart(2, "0")} ARTICLES</span>
+            </div>
+            <div class="article-links">
+              ${item.articles.map((article, index) => `
+                <a class="article-link" href="${article.url}" target="_blank" rel="noopener noreferrer">
+                  <span class="article-link-index">A${index + 1}</span>
+                  <span>${article.title}</span>
+                  <span class="article-link-arrow">↗</span>
+                </a>`).join("")}
+            </div>
+          </div>` : "";
+      const podcast = item.podcast ? `
+          <div class="podcast-shelf">
+            <div class="podcast-shelf-head">
+              <span>播客</span>
+              <span>PODCAST</span>
+            </div>
+            <a class="podcast-card" href="${item.podcast.cover}" target="_blank" rel="noopener noreferrer" aria-label="放大查看${item.podcast.title}播客订阅二维码">
+              <img src="${item.podcast.cover}" alt="${item.podcast.alt}">
+              <small><span>${item.podcast.title}</span><span>点击放大 / 长按识别 ↗</span></small>
+            </a>
+          </div>` : "";
+      const media = item.videos?.length ? `
+          <div class="film-reel">
+            ${item.videos.map((video) => `
+              <a class="film-link" href="${video.url}" target="_blank" rel="noopener noreferrer" aria-label="观看：${video.title}">
+                <span class="film-frame has-cover">
+                  <img src="${video.cover}" alt="${video.alt}">
+                  <span class="film-play">▶</span>
+                </span>
+                <span class="film-video-title">${video.title}</span>
+              </a>`).join("")}
+          </div>
+          ${item.videos.length > 1 ? `
+            <div class="film-reel-controls">
+              <span>${item.videos.length} FILMS / SWIPE</span>
+              <span class="film-reel-count">01 / ${String(item.videos.length).padStart(2, "0")}</span>
+              <span class="film-reel-buttons">
+                <button class="film-reel-button" type="button" data-reel-direction="previous" aria-label="上一支短片">←</button>
+                <button class="film-reel-button" type="button" data-reel-direction="next" aria-label="下一支短片">→</button>
+              </span>
+            </div>` : ""}
+          ${articles}
+          ${podcast}` : item.textOnly ? "" : `
+          <div class="film-frame">
+            <span class="film-play">▶</span>
+            <p class="film-placeholder">视频封面待接入</p>
+          </div>
+          ${articles}
+          ${podcast}`;
+      const mediaSection = media ? `
+        <div class="archive-media${item.articles?.length ? " has-articles" : ""}${item.podcast ? " has-podcast" : ""}">
+          <div class="film-meta"><span>FILM ARCHIVE</span><span>${item.num} / 06</span></div>
+          ${media}
+        </div>` : "";
+      timelineCard.innerHTML = `
+        ${mediaSection}
+        <div class="archive-copy${item.textOnly ? " text-only" : ""}">
+          <span class="card-kicker">${item.num}</span>
+          <h3>${item.title}</h3>
+          <p>${item.body}</p>
+        </div>`;
+      initFilmReel();
+      timelineNodes.forEach((node) => {
+        const isActive = node.dataset.step === step;
+        node.classList.toggle("active", isActive);
+        node.setAttribute("aria-expanded", String(isActive));
+      });
     }
     timelineNodes.forEach((node) => {
+      node.setAttribute("aria-controls", "timelineCard");
+      node.setAttribute("aria-expanded", String(node.classList.contains("active")));
       node.addEventListener("click", () => showTimeline(node.dataset.step));
       node.addEventListener("mouseenter", () => showTimeline(node.dataset.step));
+    });
+    showTimeline("movie");
+
+    const clickAttentionCards = document.querySelectorAll(".click-attention");
+    if ("IntersectionObserver" in window) {
+      const clickAttentionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-click-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: .38 });
+      clickAttentionCards.forEach((card) => clickAttentionObserver.observe(card));
+    } else {
+      clickAttentionCards.forEach((card) => card.classList.add("is-click-visible"));
+    }
+
+    const portfolioMain = document.querySelector("main#top");
+    const orderedSections = [
+      document.querySelector(".hero"),
+      document.querySelector("#what"),
+      document.querySelector("#services"),
+      document.querySelector("#who")
+    ];
+    orderedSections.forEach((section) => {
+      if (portfolioMain && section) portfolioMain.appendChild(section);
     });
   </script>
 </body>
